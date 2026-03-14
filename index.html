@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Ultrasound Studio</title>
+<link rel="icon" type="image/png" href="https://static.wixstatic.com/media/3bdab7_23a7ebfc17054017adf71c41b48c406c~mv2.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +46,6 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(13,27,42,0.09); }
 .nav-links > li > a:hover { color: var(--teal); }
 .nav-links > li > a:hover::after, .nav-links > li > a.active-link::after { width: 100%; }
 .nav-links > li > a.active-link { color: var(--teal); }
-/* dropdown */
 .nav-dd { position: relative; }
 .nav-dd-menu { display: none; position: absolute; top: calc(100% + 16px); left: 0; background: var(--warm-white); border: 1px solid rgba(42,127,140,0.15); border-radius: 6px; box-shadow: 0 14px 40px rgba(13,27,42,0.12); min-width: 185px; overflow: hidden; z-index: 300; }
 .nav-dd:hover .nav-dd-menu { display: block; }
@@ -58,7 +58,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(13,27,42,0.09); }
 .nav-book::after { display: none !important; }
 .nav-book:hover { background: var(--navy) !important; transform: translateY(-1px); }
 
-/* ── SHARED ELEMENTS ── */
+/* ── SHARED ── */
 .btn-primary { background: var(--teal); color: #fff; padding: 14px 32px; border-radius: 2px; text-decoration: none; font-size: 0.87rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.25s, transform 0.2s, box-shadow 0.25s; box-shadow: 0 4px 20px rgba(42,127,140,0.25); display: inline-block; cursor: pointer; border: none; font-family: inherit; }
 .btn-primary:hover { background: var(--navy); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,27,42,0.2); }
 .btn-ghost { display: inline-flex; align-items: center; gap: 8px; color: var(--navy); text-decoration: none; font-size: 0.87rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: color 0.2s, gap 0.2s; background: none; border: none; font-family: inherit; }
@@ -68,10 +68,8 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(13,27,42,0.09); }
 .btn-outline-light:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
 .btn-white { background: #fff; color: var(--teal); padding: 15px 36px; border-radius: 2px; text-decoration: none; font-size: 0.87rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.25s; white-space: nowrap; box-shadow: 0 4px 20px rgba(13,27,42,0.15); display: inline-block; }
 .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,27,42,0.22); }
-
 .sec-label { font-size: 0.73rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
 .sec-label::before { content: ''; width: 28px; height: 1px; background: var(--accent); flex-shrink: 0; }
-
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
@@ -99,9 +97,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 .ft-bottom { border-top: 1px solid rgba(255,255,255,0.09); padding-top: 26px; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; flex-wrap: wrap; gap: 8px; }
 .ft-bottom a { color: var(--teal-light); text-decoration: none; }
 
-/* ══════════════════════════════════
-   HOME PAGE
-══════════════════════════════════ */
+/* ══ HOME ══ */
 .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 120px 60px 80px; position: relative; overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--warm-white) 52%, rgba(42,127,140,0.05) 100%); z-index: 0; }
 .hero-bg::before { content: ''; position: absolute; top: -120px; right: -120px; width: 620px; height: 620px; border-radius: 50%; background: radial-gradient(circle, rgba(42,127,140,0.07) 0%, transparent 68%); }
@@ -127,7 +123,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 .hero-img-tag span { font-size: 0.73rem; color: var(--muted); }
 .hero-dot { position: absolute; top: -14px; right: -14px; width: 80px; height: 80px; border-radius: 50%; background: var(--accent); opacity: 0.13; }
 
-/* home about strip */
 .home-about { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; padding: 120px 60px; background: var(--navy); position: relative; overflow: hidden; }
 .home-about::before { content: ''; position: absolute; top: -180px; left: -180px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(42,127,140,0.14) 0%, transparent 68%); pointer-events: none; }
 .ha-img { position: relative; z-index: 1; }
@@ -141,7 +136,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 .ha-content h2 em { font-style: italic; color: var(--teal-light); }
 .ha-content p { font-size: 0.97rem; line-height: 1.82; color: rgba(255,255,255,0.63); margin-bottom: 18px; }
 
-/* home services preview */
 .home-services { padding: 110px 60px; background: var(--cream); }
 .sec-header { text-align: center; margin-bottom: 64px; }
 .sec-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 300; color: var(--navy); margin-bottom: 14px; }
@@ -155,9 +149,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 .srv-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 500; color: var(--navy); margin-bottom: 12px; }
 .srv-card p { font-size: 0.91rem; line-height: 1.76; color: var(--muted); }
 
-/* ══════════════════════════════════
-   ABOUT PAGE
-══════════════════════════════════ */
+/* ══ ABOUT ══ */
 .about-hero { padding: 160px 60px 0; background: var(--navy); position: relative; overflow: hidden; }
 .about-hero::before { content: ''; position: absolute; top: -120px; right: -120px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(42,127,140,0.12) 0%, transparent 65%); pointer-events: none; }
 .about-hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; max-width: 1200px; margin: 0 auto; }
@@ -168,14 +160,12 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 .about-hero-img { position: relative; }
 .about-hero-img img { width: 100%; height: 500px; object-fit: cover; object-position: center top; display: block; border-radius: 6px 6px 0 0; filter: brightness(0.85); }
 .about-hero-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, var(--navy) 100%); border-radius: 6px 6px 0 0; }
-
 .about-bio { padding: 90px 60px; background: var(--warm-white); }
 .about-bio-inner { max-width: 860px; margin: 0 auto; }
 .about-bio-inner h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 2.7rem); font-weight: 300; color: var(--navy); margin-bottom: 28px; line-height: 1.2; }
 .about-bio-inner h2 em { font-style: italic; color: var(--teal); }
 .about-bio-inner p { font-size: 1rem; line-height: 1.88; color: var(--muted); margin-bottom: 22px; }
 .about-bio-inner p:last-child { margin-bottom: 0; }
-
 .about-info { background: var(--cream); padding: 80px 60px; }
 .about-info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; max-width: 1100px; margin: 0 auto; }
 .info-block { background: var(--warm-white); border-radius: 6px; padding: 36px 32px; border-top: 3px solid var(--teal); box-shadow: 0 4px 20px rgba(13,27,42,0.05); }
@@ -192,9 +182,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 .info-block .map-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 0.84rem; color: var(--teal); text-decoration: none; transition: gap 0.2s; }
 .info-block .map-link:hover { gap: 9px; }
 
-/* ══════════════════════════════════
-   SERVICES PAGE
-══════════════════════════════════ */
+/* ══ SERVICES ══ */
 .srv-hero { padding: 150px 60px 88px; background: var(--navy); position: relative; overflow: hidden; text-align: center; }
 .srv-hero::before { content: ''; position: absolute; top: -140px; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(42,127,140,0.14) 0%, transparent 64%); pointer-events: none; }
 .srv-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(42,127,140,0.35), transparent); }
@@ -202,7 +190,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 .srv-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.7rem, 5vw, 3.9rem); font-weight: 300; line-height: 1.15; color: #fff; margin-bottom: 20px; }
 .srv-hero h1 em { font-style: italic; color: var(--teal-light); }
 .srv-hero p { font-size: 1.02rem; line-height: 1.82; color: rgba(255,255,255,0.58); max-width: 570px; margin: 0 auto; }
-
 .srv-full { padding: 90px 60px; background: var(--warm-white); display: flex; flex-direction: column; gap: 3px; }
 .srv-row { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: 4px; }
 .srv-row.rev { direction: rtl; }
@@ -244,49 +231,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 .ref-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
 .ref-card a { color: var(--teal); text-decoration: none; font-weight: 500; }
 
-/* ══════════════════════════════════
-   REFERRAL FORM PAGE
-══════════════════════════════════ */
-.rf-hero { padding: 150px 60px 80px; background: var(--navy); position: relative; overflow: hidden; }
-.rf-hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 550px; height: 550px; border-radius: 50%; background: radial-gradient(circle, rgba(42,127,140,0.13) 0%, transparent 65%); pointer-events: none; }
-.rf-hero-inner { position: relative; z-index: 1; max-width: 680px; }
-.rf-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4.5vw, 3.6rem); font-weight: 300; line-height: 1.15; color: #fff; margin-bottom: 18px; }
-.rf-hero h1 em { font-style: italic; color: var(--teal-light); }
-.rf-hero p { font-size: 1rem; line-height: 1.82; color: rgba(255,255,255,0.6); max-width: 520px; }
-
-.rf-body { padding: 80px 60px; background: var(--warm-white); display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
-.rf-sidebar h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--navy); margin-bottom: 16px; line-height: 1.25; }
-.rf-sidebar p { font-size: 0.93rem; line-height: 1.82; color: var(--muted); margin-bottom: 28px; }
-.rf-sidebar-cards { display: flex; flex-direction: column; gap: 14px; }
-.rf-side-card { background: var(--cream); border-radius: 7px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 12px; }
-.rf-side-card .ico { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
-.rf-side-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
-.rf-side-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.55; margin-bottom: 0; }
-
-.rf-form { background: var(--cream); border-radius: 8px; padding: 48px 44px; box-shadow: 0 6px 30px rgba(13,27,42,0.07); }
-.rf-form h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.65rem; font-weight: 500; color: var(--navy); margin-bottom: 8px; }
-.rf-form .sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
-.rf-form .sub a { color: var(--teal); text-decoration: none; }
-.form-section-title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 28px 0 16px; padding-bottom: 8px; border-bottom: 1px solid rgba(200,169,110,0.25); display: flex; align-items: center; gap: 8px; }
-.form-section-title::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.form-group { display: flex; flex-direction: column; gap: 6px; }
-.form-group.full { grid-column: 1 / -1; }
-.form-group label { font-size: 0.82rem; font-weight: 500; color: var(--text); letter-spacing: 0.03em; }
-.form-group label .req { color: var(--teal); }
-.form-group input, .form-group select, .form-group textarea {
-  padding: 11px 14px; border: 1.5px solid rgba(42,127,140,0.22); border-radius: 4px;
-  font-size: 0.92rem; font-family: inherit; color: var(--text); background: var(--warm-white);
-  transition: border-color 0.2s, box-shadow 0.2s; outline: none;
-}
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(42,127,140,0.1); }
-.form-group textarea { resize: vertical; min-height: 100px; }
-.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(107,128,145,0.6); }
-.form-submit { margin-top: 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-.form-submit .privacy { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
-.form-success { display: none; background: rgba(42,127,140,0.1); border: 1px solid rgba(42,127,140,0.3); border-radius: 6px; padding: 18px 20px; margin-top: 20px; text-align: center; }
-.form-success p { color: var(--teal); font-size: 0.93rem; font-weight: 500; }
-
 /* ANIMATIONS */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -316,10 +260,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
   .srv-visual { min-height: 200px; }
   .srv-content { padding: 36px 24px; }
   .referrals { grid-template-columns: 1fr; padding: 60px 22px; gap: 36px; }
-  .rf-hero { padding: 110px 22px 60px; }
-  .rf-body { padding: 60px 22px; }
-  .rf-form { padding: 30px 22px; }
-  .form-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -329,7 +269,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 <nav id="navbar">
   <div class="nav-logo" onclick="nav('home')">
     <div class="nav-logo-circle">
-      <img src="UltraSoundStudioLogo.png" alt="Logo" onerror="this.style.display='none'">
+      <img src="https://static.wixstatic.com/media/3bdab7_23a7ebfc17054017adf71c41b48c406c~mv2.png" alt="Logo" onerror="this.style.display='none'">
     </div>
     <div class="nav-logo-text">The Ultrasound Studio<span>Diagnostic Radiography</span></div>
   </div>
@@ -340,7 +280,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
       <a id="nl-services" onclick="nav('services')">Services <span class="chevron">▾</span></a>
       <div class="nav-dd-menu">
         <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book</a>
-        <a onclick="nav('referral')">Submit Referral</a>
       </div>
     </li>
     <li><a class="nav-book" href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Now</a></li>
@@ -348,9 +287,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 </nav>
 
 
-<!-- ══════════════════════════════════
-     HOME
-══════════════════════════════════ -->
+<!-- ══════════════ HOME ══════════════ -->
 <div id="page-home" class="page active">
 
   <section class="hero">
@@ -434,7 +371,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
         <h3>The Ultrasound Studio</h3>
         <p>Professional diagnostic sonography in Blouberg, Cape Town. HPCSA registered and committed to ethical, accurate imaging.</p>
         <div class="ft-contact">
-          <p> <a href="tel:0680928026">068 092 8026</a></p>
+          <p>📞 <a href="tel:0680928026">068 092 8026</a></p>
           <p style="margin-top:6px">Unit 10 Intercare Blaauwberg<br>Cnr Links Road, Park Dr, Parklands<br>Cape Town, 7441</p>
         </div>
       </div>
@@ -443,7 +380,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
         <li><a onclick="nav('about')">About Us</a></li>
         <li><a onclick="nav('services')">Services</a></li>
         <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Appointment</a></li>
-        <li><a onclick="nav('referral')">Submit Referral</a></li>
       </ul></div>
       <div class="ft-col"><h4>Connect</h4><ul>
         <li><a href="#">Facebook</a></li><li><a href="#">Twitter</a></li><li><a href="#">LinkedIn</a></li>
@@ -454,9 +390,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 </div>
 
 
-<!-- ══════════════════════════════════
-     ABOUT US
-══════════════════════════════════ -->
+<!-- ══════════════ ABOUT US ══════════════ -->
 <div id="page-about" class="page">
 
   <section class="about-hero">
@@ -494,17 +428,16 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
         <div class="hours-row closed"><span class="day">Sunday</span><span class="time">Closed</span></div>
       </div>
       <div class="info-block reveal" style="transition-delay:0.1s">
-        <h3><span class="ico"></span> Location</h3>
+        <h3><span class="ico">📍</span> Location</h3>
         <address>Unit 10 Intercare Blaauwberg<br>Cnr Links Road &amp; Park Drive<br>Parklands, Cape Town, 7441</address>
-        <a href="https://maps.google.com" target="_blank" class="map-link">View on Google Maps →</a>
+        <a href="https://maps.google.com/?q=Intercare+Blaauwberg+Cape+Town" target="_blank" class="map-link">View on Google Maps →</a>
       </div>
       <div class="info-block reveal" style="transition-delay:0.2s">
-        <h3><span class="ico"></span> Contact</h3>
+        <h3><span class="ico">📞</span> Contact</h3>
         <p style="font-size:0.91rem;color:var(--muted);line-height:1.7">Call or WhatsApp us to enquire about appointments, referrals, or any questions about our services.</p>
         <a href="tel:0680928026" class="phone-link">068 092 8026</a>
         <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px">
           <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-primary" target="_blank" style="text-align:center">Book Online</a>
-          <button class="btn-ghost" onclick="nav('referral')" style="justify-content:center">Submit a Referral</button>
         </div>
       </div>
     </div>
@@ -521,7 +454,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
         <h3>The Ultrasound Studio</h3>
         <p>Professional diagnostic sonography in Blouberg, Cape Town. HPCSA registered and committed to ethical, accurate imaging.</p>
         <div class="ft-contact">
-          <p><a href="tel:0680928026">068 092 8026</a></p>
+          <p>📞 <a href="tel:0680928026">068 092 8026</a></p>
           <p style="margin-top:6px">Unit 10 Intercare Blaauwberg<br>Cnr Links Road, Park Dr, Parklands<br>Cape Town, 7441</p>
         </div>
       </div>
@@ -530,7 +463,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
         <li><a onclick="nav('about')">About Us</a></li>
         <li><a onclick="nav('services')">Services</a></li>
         <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Appointment</a></li>
-        <li><a onclick="nav('referral')">Submit Referral</a></li>
       </ul></div>
       <div class="ft-col"><h4>Connect</h4><ul>
         <li><a href="#">Facebook</a></li><li><a href="#">Twitter</a></li><li><a href="#">LinkedIn</a></li>
@@ -541,9 +473,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 </div>
 
 
-<!-- ══════════════════════════════════
-     SERVICES
-══════════════════════════════════ -->
+<!-- ══════════════ SERVICES ══════════════ -->
 <div id="page-services" class="page">
 
   <section class="srv-hero">
@@ -555,7 +485,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
   </section>
 
   <section class="srv-full">
-
     <div class="srv-row reveal">
       <div class="srv-content">
         <span class="srv-num">01</span>
@@ -565,7 +494,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
       </div>
       <div class="srv-visual"><div class="sv-bg sv-msk"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🦴</span><span class="lbl">Musculoskeletal</span></div></div></div>
     </div>
-
     <div class="srv-row rev reveal">
       <div class="srv-content">
         <span class="srv-num">02</span>
@@ -575,7 +503,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
       </div>
       <div class="srv-visual"><div class="sv-bg sv-abd"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🫁</span><span class="lbl">Abdominal</span></div></div></div>
     </div>
-
     <div class="srv-row reveal">
       <div class="srv-content">
         <span class="srv-num">03</span>
@@ -585,7 +512,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
       </div>
       <div class="srv-visual"><div class="sv-bg sv-sml"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🔬</span><span class="lbl">Small Parts</span></div></div></div>
     </div>
-
     <div class="srv-row rev reveal">
       <div class="srv-content">
         <span class="srv-num">04</span>
@@ -595,7 +521,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
       </div>
       <div class="srv-visual"><div class="sv-bg sv-vas"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🫀</span><span class="lbl">Vascular</span></div></div></div>
     </div>
-
     <div class="srv-row reveal">
       <div class="srv-content">
         <span class="srv-num">05</span>
@@ -605,7 +530,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
       </div>
       <div class="srv-visual"><div class="sv-bg sv-pel"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🩻</span><span class="lbl">Pelvic</span></div></div></div>
     </div>
-
     <div class="srv-row rev reveal">
       <div class="srv-content">
         <span class="srv-num">06</span>
@@ -615,10 +539,9 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
       </div>
       <div class="srv-visual"><div class="sv-bg sv-sft"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🧬</span><span class="lbl">Soft Tissue</span></div></div></div>
     </div>
-
   </section>
 
-  <section class="referrals" id="referrals-anchor">
+  <section class="referrals">
     <div class="ref-content reveal">
       <div class="sec-label">Bookings &amp; Referrals</div>
       <h2>Referrals and Bookings</h2>
@@ -626,7 +549,7 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
       <p>Appointments can be booked online or by calling <strong style="color:var(--navy)">068 092 8026</strong>.</p>
       <div class="ref-actions">
         <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-primary" target="_blank">Book Online</a>
-        <button class="btn-ghost" onclick="nav('referral')">Submit a Referral</button>
+        <a href="tel:0680928026" class="btn-ghost">Call the Practice</a>
       </div>
     </div>
     <div class="ref-cards reveal" style="transition-delay:0.12s">
@@ -656,124 +579,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
         <li><a onclick="nav('about')">About Us</a></li>
         <li><a onclick="nav('services')">Services</a></li>
         <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Appointment</a></li>
-        <li><a onclick="nav('referral')">Submit Referral</a></li>
-      </ul></div>
-      <div class="ft-col"><h4>Connect</h4><ul>
-        <li><a href="#">Facebook</a></li><li><a href="#">Twitter</a></li><li><a href="#">LinkedIn</a></li>
-      </ul></div>
-    </div>
-    <div class="ft-bottom"><span>© 2035 The Ultrasound Studio. All rights reserved.</span><span>Designed by <a href="#">Tanit Ansara</a></span></div>
-  </footer>
-</div>
-
-
-<!-- ══════════════════════════════════
-     SUBMIT REFERRAL
-══════════════════════════════════ -->
-<div id="page-referral" class="page">
-
-  <section class="rf-hero">
-    <div class="rf-hero-inner">
-      <div class="sec-label">For Healthcare Professionals</div>
-      <h1>Working With<br><em>Medical Professionals</em></h1>
-      <p style="margin-top:18px">We value our professional relationships with doctors and healthcare providers. Our practice offers high-quality ultrasound imaging with detailed reports to assist in accurate diagnosis and patient management. All studies are performed with clinical precision and reported promptly.</p>
-    </div>
-  </section>
-
-  <section class="rf-body">
-    <div class="rf-sidebar reveal">
-      <div class="sec-label">Why Refer to Us</div>
-      <h2>Precise Imaging.<br>Prompt Reports.</h2>
-      <p>We work closely with referring healthcare professionals to deliver high-quality diagnostic ultrasound examinations and accurate, timely reports.</p>
-      <div class="rf-sidebar-cards">
-        <div class="rf-side-card"><span class="ico">🏥</span><div><h4>HPCSA Registered</h4><p>Fully accredited with over 20 years of diagnostic experience.</p></div></div>
-        <div class="rf-side-card"><span class="ico">📄</span><div><h4>Detailed Reports</h4><p>Comprehensive, promptly delivered reports to support clinical decision-making.</p></div></div>
-        <div class="rf-side-card"><span class="ico">🔒</span><div><h4>POPIA Compliant</h4><p>All patient information is handled confidentially in accordance with POPIA regulations.</p></div></div>
-        <div class="rf-side-card"><span class="ico">💳</span><div><h4>Medical Aid Claims</h4><p>We accept most major medical aid schemes on behalf of your patients.</p></div></div>
-      </div>
-    </div>
-
-    <div class="rf-form reveal" style="transition-delay:0.12s">
-      <h2>Doctor Referral Submission</h2>
-      <p class="sub">Please complete the form below to refer a patient for diagnostic ultrasound imaging. All information submitted is handled confidentially in accordance with <a href="#">POPIA regulations</a>.</p>
-
-      <form id="referralForm" onsubmit="submitForm(event)">
-        <div class="form-section-title">Referring Doctor Details</div>
-        <div class="form-grid">
-          <div class="form-group full"><label>Referring Doctor Full Name <span class="req">*</span></label><input type="text" placeholder="Dr. Jane Smith" required></div>
-          <div class="form-group"><label>Practice Name</label><input type="text" placeholder="Smith Medical Practice"></div>
-          <div class="form-group"><label>Practice Number (HPCSA / Practice Code)</label><input type="text" placeholder="PR0000000"></div>
-          <div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" placeholder="doctor@practice.co.za" required></div>
-          <div class="form-group"><label>Phone <span class="req">*</span></label><input type="tel" placeholder="021 000 0000" required></div>
-          <div class="form-group full"><label>Practice Address <span class="req">*</span></label><input type="text" placeholder="123 Medical Street, Cape Town" required></div>
-        </div>
-
-        <div class="form-section-title">Patient Details</div>
-        <div class="form-grid">
-          <div class="form-group"><label>Patient Full Name <span class="req">*</span></label><input type="text" placeholder="Patient name" required></div>
-          <div class="form-group"><label>Patient Date of Birth <span class="req">*</span></label><input type="date" required></div>
-          <div class="form-group"><label>Patient Contact Number</label><input type="tel" placeholder="082 000 0000"></div>
-          <div class="form-group"><label>Medical Aid Scheme</label><input type="text" placeholder="e.g. Discovery Health"></div>
-          <div class="form-group"><label>Medical Aid Number</label><input type="text" placeholder="Membership number"></div>
-        </div>
-
-        <div class="form-section-title">Referral Details</div>
-        <div class="form-grid">
-          <div class="form-group full">
-            <label>Ultrasound Examination Required <span class="req">*</span></label>
-            <select required>
-              <option value="" disabled selected>Select examination type</option>
-              <option>Musculoskeletal Ultrasound</option>
-              <option>Abdominal Ultrasound</option>
-              <option>Small Parts Ultrasound (Breast / Thyroid / Scrotum)</option>
-              <option>Vascular Ultrasound</option>
-              <option>Pelvic &amp; Gynaecological Ultrasound</option>
-              <option>Soft Tissue Ultrasound</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group full"><label>Clinical Indication / Reason for Referral <span class="req">*</span></label><textarea placeholder="Please provide relevant clinical history and reason for referral..." required></textarea></div>
-          <div class="form-group full"><label>Urgency</label>
-            <select>
-              <option value="routine" selected>Routine</option>
-              <option value="urgent">Urgent</option>
-              <option value="semi-urgent">Semi-Urgent</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-submit">
-          <button type="submit" class="btn-primary">Submit Referral</button>
-          <p class="privacy">All information is handled in accordance<br>with POPIA regulations.</p>
-        </div>
-      </form>
-      <div class="form-success" id="formSuccess">
-        <p>✅ &nbsp;Thank you! Your referral has been submitted successfully. We will be in touch shortly.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="cta-strip">
-    <div class="cta-strip-text"><h2>Need to Book Directly?</h2><p>Patients can also book their appointment online without a referral for most examinations.</p></div>
-    <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-white" target="_blank">Book Online</a>
-  </div>
-
-  <footer>
-    <div class="ft-grid">
-      <div class="ft-brand">
-        <h3>The Ultrasound Studio</h3>
-        <p>Professional diagnostic sonography in Blouberg, Cape Town. HPCSA registered and committed to ethical, accurate imaging.</p>
-        <div class="ft-contact">
-          <p> <a href="tel:0680928026">068 092 8026</a></p>
-          <p style="margin-top:6px">Unit 10 Intercare Blaauwberg<br>Cnr Links Road, Park Dr, Parklands<br>Cape Town, 7441</p>
-        </div>
-      </div>
-      <div class="ft-col"><h4>Navigation</h4><ul>
-        <li><a onclick="nav('home')">Home</a></li>
-        <li><a onclick="nav('about')">About Us</a></li>
-        <li><a onclick="nav('services')">Services</a></li>
-        <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Appointment</a></li>
-        <li><a onclick="nav('referral')">Submit Referral</a></li>
       </ul></div>
       <div class="ft-col"><h4>Connect</h4><ul>
         <li><a href="#">Facebook</a></li><li><a href="#">Twitter</a></li><li><a href="#">LinkedIn</a></li>
@@ -785,28 +590,20 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
 
 
 <script>
-  /* ── NAVIGATION ── */
   function nav(id) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // active nav link
     document.querySelectorAll('.nav-links > li > a[id^="nl-"]').forEach(a => a.classList.remove('active-link'));
     const t = document.getElementById('nl-' + id);
     if (t) t.classList.add('active-link');
-    else if (id === 'referral') {
-      const s = document.getElementById('nl-services');
-      if (s) s.classList.add('active-link');
-    }
     setTimeout(triggerReveals, 80);
   }
 
-  /* ── SCROLL NAV SHADOW ── */
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  /* ── REVEAL ON SCROLL ── */
   function triggerReveals() {
     const els = document.querySelectorAll('.page.active .reveal');
     const obs = new IntersectionObserver((entries) => {
@@ -815,13 +612,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 6
     els.forEach(el => { el.classList.remove('visible'); obs.observe(el); });
   }
   triggerReveals();
-
-  /* ── REFERRAL FORM ── */
-  function submitForm(e) {
-    e.preventDefault();
-    document.getElementById('referralForm').style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  }
 </script>
 </body>
 </html>
