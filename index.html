@@ -1,212 +1,604 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ansara Tanit | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #ffffff;
-            --text: #111111;
-            --accent: #000000;
-            --secondary-text: #666666;
-            --header-blur: rgba(255, 255, 255, 0.8);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ultrasound Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0d1b2a;
+    --teal: #2a7f8c;
+    --teal-light: #3aa8b8;
+    --cream: #f5f1ec;
+    --warm-white: #fdfaf7;
+    --text: #1a2530;
+    --muted: #6b8091;
+    --accent: #c8a96e;
+  }
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.5;
-            overflow-x: hidden;
-        }
+  html { scroll-behavior: smooth; }
 
-        /* --- THE UPGRADED HEADER --- */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            height: 80px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 6%;
-            z-index: 1000;
-            background: var(--header-blur);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--warm-white);
+    color: var(--text);
+    overflow-x: hidden;
+  }
 
-        header.scrolled {
-            height: 65px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-        }
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(253,250,247,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(42,127,140,0.12);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(13,27,42,0.08); }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            text-decoration: none;
-            color: var(--text);
-            letter-spacing: -0.5px;
-        }
+  .nav-logo {
+    display: flex; align-items: center; gap: 14px;
+    text-decoration: none;
+  }
+  .nav-logo-circle {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--teal);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .nav-logo-circle img { width: 100%; height: 100%; object-fit: cover; }
+  .nav-logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-weight: 500; letter-spacing: 0.04em;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .nav-logo-text span { display: block; font-weight: 300; font-style: italic; font-size: 0.85rem; color: var(--teal); }
 
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 40px;
-            align-items: center;
-        }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.88rem; font-weight: 400; letter-spacing: 0.06em;
+    color: var(--text); text-transform: uppercase;
+    position: relative; padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+    background: var(--teal); transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+  .nav-links a:hover::after { width: 100%; }
 
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text);
-            font-size: 0.9rem;
-            font-weight: 500;
-            position: relative;
-            transition: 0.3s;
-        }
+  .nav-cta {
+    background: var(--teal); color: #fff !important;
+    padding: 10px 22px !important; border-radius: 2px;
+    letter-spacing: 0.08em !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta::after { display: none !important; }
+  .nav-cta:hover { background: var(--navy) !important; transform: translateY(-1px); }
 
-        /* Hover Line Animation */
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
 
-        nav ul li a:hover::after {
-            width: 100%;
-        }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--warm-white) 55%, rgba(42,127,140,0.06) 100%);
+    z-index: 0;
+  }
+  .hero-bg::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(42,127,140,0.08) 0%, transparent 70%);
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute; bottom: -80px; left: 30%;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.07) 0%, transparent 70%);
+  }
 
-        .header-cta {
-            background: var(--accent);
-            color: white !important;
-            padding: 12px 24px;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            transition: transform 0.2s ease;
-        }
+  .hero-content { position: relative; z-index: 1; padding-right: 60px; }
 
-        .header-cta:hover {
-            transform: translateY(-2px);
-        }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(42,127,140,0.1); border: 1px solid rgba(42,127,140,0.25);
+    color: var(--teal); padding: 6px 16px; border-radius: 100px;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 32px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            padding: 0 10%;
-            background: #fcfcfc;
-        }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero h1 em { font-style: italic; color: var(--teal); }
 
-        .hero-content {
-            max-width: 800px;
-        }
+  .hero p {
+    font-size: 1.05rem; line-height: 1.75; color: var(--muted);
+    max-width: 440px; margin-bottom: 44px;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
 
-        .hero-content h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 800;
-            line-height: 0.9;
-            margin-bottom: 24px;
-            letter-spacing: -2px;
-        }
+  .hero-actions {
+    display: flex; gap: 16px; align-items: center;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
 
-        .hero-content p {
-            font-size: 1.25rem;
-            color: var(--secondary-text);
-            max-width: 500px;
-            margin-bottom: 40px;
-        }
+  .btn-primary {
+    background: var(--teal); color: #fff;
+    padding: 14px 32px; border-radius: 2px;
+    text-decoration: none; font-size: 0.88rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+    box-shadow: 0 4px 20px rgba(42,127,140,0.25);
+  }
+  .btn-primary:hover { background: var(--navy); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,27,42,0.2); }
 
-        /* --- IMAGE GRID SECTION (Standard Wix Studio Layout) --- */
-        .work-grid {
-            padding: 100px 6%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-        }
+  .btn-secondary {
+    color: var(--navy); text-decoration: none;
+    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .btn-secondary::after { content: '→'; transition: transform 0.2s; }
+  .btn-secondary:hover { color: var(--teal); gap: 12px; }
+  .btn-secondary:hover::after { transform: translateX(2px); }
 
-        .grid-item {
-            width: 100%;
-            background: #f0f0f0;
-            aspect-ratio: 4/5;
-            overflow: hidden;
-            position: relative;
-            cursor: pointer;
-        }
+  .hero-trust {
+    display: flex; gap: 32px; margin-top: 52px;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+  .trust-item { display: flex; align-items: center; gap: 10px; }
+  .trust-icon {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(42,127,140,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .trust-label { font-size: 0.82rem; font-weight: 500; color: var(--navy); line-height: 1.3; }
+  .trust-sub { font-size: 0.72rem; color: var(--muted); }
 
-        .grid-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-        }
+  .hero-image {
+    position: relative; z-index: 1;
+    animation: fadeIn 1s 0.2s ease both;
+  }
+  .hero-image-wrap {
+    position: relative;
+    border-radius: 4px 60px 4px 60px;
+    overflow: hidden;
+    box-shadow: 0 30px 80px rgba(13,27,42,0.18);
+  }
+  .hero-image-wrap img { width: 100%; height: 520px; object-fit: cover; display: block; }
+  .hero-image-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,27,42,0.3) 0%, transparent 50%);
+  }
+  .hero-image-tag {
+    position: absolute; bottom: 24px; left: 24px;
+    background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+    padding: 12px 18px; border-radius: 8px;
+    border-left: 3px solid var(--teal);
+  }
+  .hero-image-tag strong { display: block; font-size: 0.85rem; color: var(--navy); }
+  .hero-image-tag span { font-size: 0.75rem; color: var(--muted); }
 
-        .grid-item:hover img {
-            transform: scale(1.05);
-        }
+  .hero-accent-dot {
+    position: absolute; top: -12px; right: -12px;
+    width: 80px; height: 80px; border-radius: 50%;
+    background: var(--accent); opacity: 0.15;
+  }
 
-        /* Responsive adjustments */
-        @media (max-width: 900px) {
-            .work-grid { grid-template-columns: 1fr; }
-            nav { display: none; } /* Simplified for mobile */
-            .hero-content h1 { font-size: 4rem; }
-        }
-    </style>
+  /* ── ABOUT ── */
+  .about {
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 80px;
+    padding: 120px 60px;
+    background: var(--navy);
+    position: relative; overflow: hidden;
+  }
+  .about::before {
+    content: '';
+    position: absolute; top: -200px; left: -200px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(42,127,140,0.15) 0%, transparent 70%);
+  }
+
+  .about-images { position: relative; z-index: 1; }
+  .about-img-main {
+    border-radius: 4px 50px 4px 50px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .about-img-main img { width: 100%; height: 480px; object-fit: cover; object-position: center top; display: block; }
+  .about-img-badge {
+    position: absolute; bottom: -20px; right: -20px;
+    background: var(--teal); color: #fff;
+    padding: 20px 24px; border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(42,127,140,0.4);
+  }
+  .about-img-badge strong { display: block; font-size: 2rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+  .about-img-badge span { font-size: 0.75rem; letter-spacing: 0.08em; opacity: 0.9; }
+
+  .about-content { position: relative; z-index: 1; }
+  .section-label {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::before { content: ''; width: 30px; height: 1px; background: var(--accent); }
+
+  .about-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3rem);
+    font-weight: 300; line-height: 1.2;
+    color: #fff; margin-bottom: 24px;
+  }
+  .about-content h2 em { font-style: italic; color: var(--teal-light); }
+  .about-content p {
+    font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.65);
+    margin-bottom: 36px;
+  }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 10px;
+    border: 1px solid rgba(42,127,140,0.5); color: var(--teal-light);
+    padding: 12px 28px; border-radius: 2px;
+    text-decoration: none; font-size: 0.88rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: all 0.25s;
+  }
+  .btn-outline:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
+
+  /* ── SERVICES ── */
+  .services { padding: 120px 60px; background: var(--cream); }
+  .section-header { text-align: center; margin-bottom: 72px; }
+  .section-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3rem); font-weight: 300;
+    color: var(--navy); margin-bottom: 16px;
+  }
+  .section-header p { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+  .service-card {
+    background: var(--warm-white); border-radius: 4px;
+    padding: 44px 36px;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid transparent;
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(13,27,42,0.1);
+    border-color: rgba(42,127,140,0.2);
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 0; background: var(--teal);
+    transition: height 0.4s;
+  }
+  .service-card:hover::before { height: 100%; }
+
+  .service-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: rgba(42,127,140,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; margin-bottom: 24px;
+  }
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 500; color: var(--navy);
+    margin-bottom: 14px;
+  }
+  .service-card p { font-size: 0.93rem; line-height: 1.75; color: var(--muted); }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: var(--teal);
+    padding: 80px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute; right: -100px; top: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .cta-banner::after {
+    content: '';
+    position: absolute; left: 30%; bottom: -80px;
+    width: 250px; height: 250px; border-radius: 50%;
+    background: rgba(13,27,42,0.1);
+  }
+  .cta-text { position: relative; z-index: 1; }
+  .cta-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 300;
+    color: #fff; margin-bottom: 8px;
+  }
+  .cta-text p { color: rgba(255,255,255,0.75); font-size: 1rem; }
+
+  .btn-white {
+    background: #fff; color: var(--teal);
+    padding: 16px 36px; border-radius: 2px;
+    text-decoration: none; font-size: 0.88rem; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: all 0.25s; white-space: nowrap;
+    position: relative; z-index: 1;
+    box-shadow: 0 4px 20px rgba(13,27,42,0.15);
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,27,42,0.25); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.6);
+    padding: 72px 60px 40px;
+  }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+
+  .footer-brand h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; color: #fff; margin-bottom: 14px;
+  }
+  .footer-brand p { font-size: 0.9rem; line-height: 1.7; max-width: 280px; }
+  .footer-contact { margin-top: 24px; }
+  .footer-contact p { font-size: 0.88rem; margin-bottom: 6px; }
+  .footer-contact a { color: var(--teal-light); text-decoration: none; }
+
+  .footer-col h4 {
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul a {
+    color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--teal-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 28px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.82rem;
+  }
+  .footer-bottom a { color: var(--teal-light); text-decoration: none; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
+    .hero-content { padding-right: 0; }
+    .hero-image { display: none; }
+    .about { grid-template-columns: 1fr; padding: 80px 24px; gap: 50px; }
+    .about-images { display: none; }
+    .services { padding: 80px 24px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .cta-banner { flex-direction: column; gap: 32px; padding: 60px 24px; text-align: center; }
+    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+    footer { padding: 60px 24px 32px; }
+  }
+</style>
 </head>
 <body>
 
-    <header id="navbar">
-        <a href="#" class="logo">ANSARA TANIT</a>
-        <nav>
-            <ul>
-                <li><a href="#work">Featured Work</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact" class="header-cta">Contact Me</a></li>
-            </ul>
-        </nav>
-    </header>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-circle">
+      <img src="https://static.wixstatic.com/media/3bdab7_23a7ebfc17054017adf71c41b48c406c~mv2.png" alt="Logo" onerror="this.style.display='none'">
+    </div>
+    <div class="nav-logo-text">
+      The Ultrasound Studio
+      <span>Diagnostic Radiography</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About Us</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="nav-cta" target="_blank">Book Now</a></li>
+  </ul>
+</nav>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Digital <br>Experiences.</h1>
-            <p>A showcase of professional design and creative strategy tailored for the modern web.</p>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">HPCSA Registered Sonographer</div>
+    <h1>Professional<br>Diagnostic<br><em>Imaging You Can Trust</em></h1>
+    <p>Accurate, high-quality ultrasound services delivered with care, precision, and over 20 years of professional experience.</p>
+    <div class="hero-actions">
+      <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-primary" target="_blank">Book an Appointment</a>
+      <a href="#services" class="btn-secondary">See Services</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <div class="trust-icon">✓</div>
+        <div>
+          <div class="trust-label">HPCSA Registered</div>
+          <div class="trust-sub">Fully accredited</div>
         </div>
-    </section>
-
-    <section id="work" class="work-grid">
-        <div class="grid-item">
-            <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=1000" alt="Project 1">
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🩺</div>
+        <div>
+          <div class="trust-label">Qualified Radiographer</div>
+          <div class="trust-sub">20+ years experience</div>
         </div>
-        <div class="grid-item">
-            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1000" alt="Project 2">
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">💳</div>
+        <div>
+          <div class="trust-label">Medical Aid Claims</div>
+          <div class="trust-sub">All major schemes</div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image">
+    <div style="position:relative;">
+      <div class="hero-accent-dot"></div>
+      <div class="hero-image-wrap">
+        <img src="https://static.wixstatic.com/media/11062b_b8f1525441e74a238d9d2fe73c60bd54~mv2.jpeg" alt="Ultrasound Examination">
+        <div class="hero-image-overlay"></div>
+        <div class="hero-image-tag">
+          <strong>State-of-the-art Equipment</strong>
+          <span>Blouberg, Cape Town</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Shrink header on scroll
-        window.onscroll = function() {
-            const nav = document.getElementById('navbar');
-            if (window.pageYOffset > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        };
-    </script>
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-images reveal">
+    <div class="about-img-main">
+      <img src="https://static.wixstatic.com/media/3bdab7_d3f0a321b11a4b7bad8fa584d2a20cc7~mv2.jpg" alt="Lynne Marais">
+    </div>
+    <div class="about-img-badge">
+      <strong>20+</strong>
+      <span>Years of Experience</span>
+    </div>
+  </div>
+  <div class="about-content reveal">
+    <div class="section-label">About Us</div>
+    <h2>Committed to<br><em>Accurate & Ethical</em><br>Medical Imaging</h2>
+    <p>Hi, I'm Lynne Marais, a Diagnostic Sonographer based in Blouberg, Cape Town. With over 20 years of experience, I provide high-quality ultrasound examinations with a strong focus on patient comfort, care, and a personal touch.</p>
+    <p style="margin-top: -12px;">The Ultrasound Studio provides professional diagnostic radiography services with a strong focus on accuracy, patient comfort, and ethical practice. We work closely with referring healthcare professionals to support reliable diagnosis and quality patient care.</p>
+    <a href="#" class="btn-outline">Learn More About the Practice →</a>
+  </div>
+</section>
 
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-header reveal">
+    <div class="section-label" style="justify-content:center;">Our Services</div>
+    <h2>What We Offer</h2>
+    <p>Comprehensive ultrasound imaging services delivered with precision and care.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <div class="service-icon">🦴</div>
+      <h3>Musculoskeletal Ultrasound</h3>
+      <p>Ultrasound assessment of joints and soft tissues, including shoulders, knees, ankles, tendons, ligaments, and muscles. Commonly used for sports injuries, pain, inflammation, or limited movement.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.1s">
+      <div class="service-icon">🫁</div>
+      <h3>Abdominal Ultrasound</h3>
+      <p>Comprehensive ultrasound imaging of abdominal organs, performed with accuracy, care, and attention to patient comfort. Detailed evaluation for accurate clinical diagnosis.</p>
+    </div>
+    <div class="service-card reveal" style="transition-delay:0.2s">
+      <div class="service-icon">🫀</div>
+      <h3>Vascular Ultrasound</h3>
+      <p>Specialised ultrasound studies to assess blood flow and circulation, including carotid, venous, and arterial scans. Essential for diagnosing vascular conditions.</p>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:48px;" class="reveal">
+    <a href="#" class="btn-primary">See All Services →</a>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="cta-text">
+    <h2>Ready to Make a Booking?</h2>
+    <p>Schedule your appointment online — quick, easy, and at your convenience.</p>
+  </div>
+  <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-white" target="_blank">Book Now</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>The Ultrasound Studio</h3>
+      <p>Professional diagnostic sonography services in Blouberg, Cape Town. HPCSA registered and committed to ethical, accurate imaging.</p>
+      <div class="footer-contact">
+        <p>📞 <a href="tel:0680928026">068 092 8026</a></p>
+        <p style="margin-top:8px; font-size:0.85rem; line-height:1.6;">Unit 10 Intercare Blaauwberg<br>Cnr Links Road, Park Dr<br>Parklands, Cape Town, 7441</p>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Appointment</a></li>
+        <li><a href="#">Submit Referral</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="#">Facebook</a></li>
+        <li><a href="#">Twitter</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 The Ultrasound Studio. All rights reserved.</span>
+    <span>Designed by <a href="#">Tanit Ansara</a></span>
+  </div>
+</footer>
+
+<script>
+  // Scroll nav shadow
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
