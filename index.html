@@ -3,147 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ansara Tanit | Professional Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <title>Ansara Tanit | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-bg: #ffffff;
-            --accent-color: #1a1a1a;
-            --text-main: #333333;
-            --header-height: 80px;
-            --transition: all 0.3s ease;
+            --bg: #ffffff;
+            --text: #111111;
+            --accent: #000000;
+            --secondary-text: #666666;
+            --header-blur: rgba(255, 255, 255, 0.8);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-main);
-            background-color: var(--primary-bg);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            overflow-x: hidden;
         }
 
         /* --- THE UPGRADED HEADER --- */
         header {
-            height: var(--header-height);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 5%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px); /* Modern frosted glass effect */
-            border-bottom: 1px solid #eee;
+            padding: 0 6%;
             z-index: 1000;
-            transition: var(--transition);
+            background: var(--header-blur);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         header.scrolled {
-            height: 60px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            height: 65px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 700;
             text-decoration: none;
-            color: var(--accent-color);
+            color: var(--text);
             letter-spacing: -0.5px;
         }
 
         nav ul {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 40px;
+            align-items: center;
         }
 
         nav ul li a {
             text-decoration: none;
-            color: var(--text-main);
-            font-weight: 400;
-            font-size: 0.95rem;
-            transition: var(--transition);
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            transition: 0.3s;
         }
 
-        nav ul li a:hover {
-            color: #666;
+        /* Hover Line Animation */
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
         }
 
-        /* Call to Action Button in Header */
-        .cta-btn {
-            background: var(--accent-color);
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .header-cta {
+            background: var(--accent);
             color: white !important;
-            padding: 10px 20px;
-            border-radius: 50px;
+            padding: 12px 24px;
+            border-radius: 4px;
             font-weight: 600;
+            font-size: 0.85rem;
+            transition: transform 0.2s ease;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
         }
 
         /* --- HERO SECTION --- */
         .hero {
             height: 100vh;
+            width: 100%;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
             padding: 0 10%;
-            background: linear-gradient(to bottom, #f9f9f9, #ffffff);
+            background: #fcfcfc;
         }
 
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            margin-bottom: 20px;
-            line-height: 1.1;
+        .hero-content {
+            max-width: 800px;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            color: #666;
-            margin-bottom: 30px;
+        .hero-content h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
+            font-weight: 800;
+            line-height: 0.9;
+            margin-bottom: 24px;
+            letter-spacing: -2px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav { display: none; } /* Add a hamburger menu later if needed */
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--secondary-text);
+            max-width: 500px;
+            margin-bottom: 40px;
+        }
+
+        /* --- IMAGE GRID SECTION (Standard Wix Studio Layout) --- */
+        .work-grid {
+            padding: 100px 6%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .grid-item {
+            width: 100%;
+            background: #f0f0f0;
+            aspect-ratio: 4/5;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .grid-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .work-grid { grid-template-columns: 1fr; }
+            nav { display: none; } /* Simplified for mobile */
+            .hero-content h1 { font-size: 4rem; }
         }
     </style>
 </head>
 <body>
 
-    <header id="main-header">
+    <header id="navbar">
         <a href="#" class="logo">ANSARA TANIT</a>
         <nav>
             <ul>
-                <li><a href="#work">Work</a></li>
+                <li><a href="#work">Featured Work</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#contact" class="cta-btn">Get in Touch</a></li>
+                <li><a href="#contact" class="header-cta">Contact Me</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <h1>Creative Vision. <br>Digital Excellence.</h1>
-            <p>Moving your brand from Wix to a high-performance, custom-coded experience.</p>
-        </section>
-        
-        </main>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Digital <br>Experiences.</h1>
+            <p>A showcase of professional design and creative strategy tailored for the modern web.</p>
+        </div>
+    </section>
+
+    <section id="work" class="work-grid">
+        <div class="grid-item">
+            <img src="https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?auto=format&fit=crop&q=80&w=1000" alt="Project 1">
+        </div>
+        <div class="grid-item">
+            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=1000" alt="Project 2">
+        </div>
+    </section>
 
     <script>
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('main-header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
+        // Shrink header on scroll
+        window.onscroll = function() {
+            const nav = document.getElementById('navbar');
+            if (window.pageYOffset > 50) {
+                nav.classList.add('scrolled');
             } else {
-                header.classList.remove('scrolled');
+                nav.classList.remove('scrolled');
             }
-        });
+        };
     </script>
+
 </body>
 </html>
