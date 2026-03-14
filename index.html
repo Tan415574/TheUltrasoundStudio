@@ -6,599 +6,822 @@
 <title>The Ultrasound Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0d1b2a; --teal: #2a7f8c; --teal-light: #3aa8b8;
+  --cream: #f5f1ec; --warm-white: #fdfaf7;
+  --text: #1a2530; --muted: #6b8091; --accent: #c8a96e;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Outfit', sans-serif; background: var(--warm-white); color: var(--text); overflow-x: hidden; }
 
-  :root {
-    --navy: #0d1b2a;
-    --teal: #2a7f8c;
-    --teal-light: #3aa8b8;
-    --cream: #f5f1ec;
-    --warm-white: #fdfaf7;
-    --text: #1a2530;
-    --muted: #6b8091;
-    --accent: #c8a96e;
-  }
+/* ── PAGE SYSTEM ── */
+.page { display: none; }
+.page.active { display: block; }
 
-  html { scroll-behavior: smooth; }
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 60px;
+  background: rgba(253,250,247,0.97); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(42,127,140,0.12);
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 4px 30px rgba(13,27,42,0.09); }
+.nav-logo { display: flex; align-items: center; gap: 13px; cursor: pointer; }
+.nav-logo-circle { width: 46px; height: 46px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+.nav-logo-circle img { width: 100%; height: 100%; object-fit: cover; }
+.nav-logo-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 500; letter-spacing: 0.03em; color: var(--navy); line-height: 1.2; }
+.nav-logo-text span { display: block; font-weight: 300; font-style: italic; font-size: 0.82rem; color: var(--teal); }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links > li > a {
+  text-decoration: none; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.06em;
+  color: var(--text); text-transform: uppercase; cursor: pointer;
+  position: relative; padding-bottom: 3px; transition: color 0.2s;
+  background: none; border: none; font-family: inherit; display: inline-block;
+}
+.nav-links > li > a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: var(--teal); transition: width 0.3s; }
+.nav-links > li > a:hover { color: var(--teal); }
+.nav-links > li > a:hover::after, .nav-links > li > a.active-link::after { width: 100%; }
+.nav-links > li > a.active-link { color: var(--teal); }
+/* dropdown */
+.nav-dd { position: relative; }
+.nav-dd-menu { display: none; position: absolute; top: calc(100% + 16px); left: 0; background: var(--warm-white); border: 1px solid rgba(42,127,140,0.15); border-radius: 6px; box-shadow: 0 14px 40px rgba(13,27,42,0.12); min-width: 185px; overflow: hidden; z-index: 300; }
+.nav-dd:hover .nav-dd-menu { display: block; }
+.nav-dd-menu a { display: block; padding: 11px 18px; font-size: 0.83rem; color: var(--text); text-decoration: none; letter-spacing: 0.05em; text-transform: uppercase; border-bottom: 1px solid rgba(42,127,140,0.08); transition: background 0.2s, color 0.2s; cursor: pointer; }
+.nav-dd-menu a:last-child { border-bottom: none; }
+.nav-dd-menu a:hover { background: rgba(42,127,140,0.06); color: var(--teal); }
+.chevron { font-size: 0.65rem; margin-left: 4px; display: inline-block; transition: transform 0.2s; vertical-align: middle; }
+.nav-dd:hover .chevron { transform: rotate(180deg); }
+.nav-book { background: var(--teal) !important; color: #fff !important; padding: 10px 24px; border-radius: 2px; white-space: nowrap; }
+.nav-book::after { display: none !important; }
+.nav-book:hover { background: var(--navy) !important; transform: translateY(-1px); }
 
-  body {
-    font-family: 'Outfit', sans-serif;
-    background: var(--warm-white);
-    color: var(--text);
-    overflow-x: hidden;
-  }
+/* ── SHARED ELEMENTS ── */
+.btn-primary { background: var(--teal); color: #fff; padding: 14px 32px; border-radius: 2px; text-decoration: none; font-size: 0.87rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.25s, transform 0.2s, box-shadow 0.25s; box-shadow: 0 4px 20px rgba(42,127,140,0.25); display: inline-block; cursor: pointer; border: none; font-family: inherit; }
+.btn-primary:hover { background: var(--navy); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,27,42,0.2); }
+.btn-ghost { display: inline-flex; align-items: center; gap: 8px; color: var(--navy); text-decoration: none; font-size: 0.87rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: color 0.2s, gap 0.2s; background: none; border: none; font-family: inherit; }
+.btn-ghost::after { content: '→'; transition: transform 0.2s; }
+.btn-ghost:hover { color: var(--teal); gap: 12px; }
+.btn-outline-light { display: inline-flex; align-items: center; gap: 10px; border: 1px solid rgba(42,127,140,0.45); color: var(--teal-light); padding: 12px 28px; border-radius: 2px; text-decoration: none; font-size: 0.87rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.25s; cursor: pointer; background: none; font-family: inherit; }
+.btn-outline-light:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
+.btn-white { background: #fff; color: var(--teal); padding: 15px 36px; border-radius: 2px; text-decoration: none; font-size: 0.87rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.25s; white-space: nowrap; box-shadow: 0 4px 20px rgba(13,27,42,0.15); display: inline-block; }
+.btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,27,42,0.22); }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 60px;
-    background: rgba(253,250,247,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(42,127,140,0.12);
-    transition: box-shadow 0.3s;
-  }
-  nav.scrolled { box-shadow: 0 4px 30px rgba(13,27,42,0.08); }
+.sec-label { font-size: 0.73rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.sec-label::before { content: ''; width: 28px; height: 1px; background: var(--accent); flex-shrink: 0; }
 
-  .nav-logo {
-    display: flex; align-items: center; gap: 14px;
-    text-decoration: none;
-  }
-  .nav-logo-circle {
-    width: 48px; height: 48px; border-radius: 50%;
-    background: var(--teal);
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-  }
-  .nav-logo-circle img { width: 100%; height: 100%; object-fit: cover; }
-  .nav-logo-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.15rem; font-weight: 500; letter-spacing: 0.04em;
-    color: var(--navy);
-    line-height: 1.2;
-  }
-  .nav-logo-text span { display: block; font-weight: 300; font-style: italic; font-size: 0.85rem; color: var(--teal); }
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
-  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
-  .nav-links a {
-    text-decoration: none; font-size: 0.88rem; font-weight: 400; letter-spacing: 0.06em;
-    color: var(--text); text-transform: uppercase;
-    position: relative; padding-bottom: 2px;
-    transition: color 0.2s;
-  }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
-    background: var(--teal); transition: width 0.3s;
-  }
-  .nav-links a:hover { color: var(--teal); }
-  .nav-links a:hover::after { width: 100%; }
+/* CTA BANNER */
+.cta-strip { background: var(--teal); padding: 72px 60px; display: flex; align-items: center; justify-content: space-between; gap: 40px; position: relative; overflow: hidden; }
+.cta-strip::before { content: ''; position: absolute; right: -80px; top: -80px; width: 380px; height: 380px; border-radius: 50%; background: rgba(255,255,255,0.06); pointer-events: none; }
+.cta-strip::after { content: ''; position: absolute; left: 25%; bottom: -70px; width: 250px; height: 250px; border-radius: 50%; background: rgba(13,27,42,0.1); pointer-events: none; }
+.cta-strip-text { position: relative; z-index: 1; }
+.cta-strip-text h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 300; color: #fff; margin-bottom: 6px; }
+.cta-strip-text p { color: rgba(255,255,255,0.72); font-size: 0.97rem; }
 
-  .nav-cta {
-    background: var(--teal); color: #fff !important;
-    padding: 10px 22px !important; border-radius: 2px;
-    letter-spacing: 0.08em !important;
-    transition: background 0.2s, transform 0.2s !important;
-  }
-  .nav-cta::after { display: none !important; }
-  .nav-cta:hover { background: var(--navy) !important; transform: translateY(-1px); }
+/* FOOTER */
+footer { background: var(--navy); color: rgba(255,255,255,0.58); padding: 68px 60px 36px; }
+.ft-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 56px; margin-bottom: 52px; }
+.ft-brand h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.45rem; font-weight: 400; color: #fff; margin-bottom: 12px; }
+.ft-brand p { font-size: 0.88rem; line-height: 1.75; max-width: 270px; }
+.ft-contact { margin-top: 22px; }
+.ft-contact p { font-size: 0.86rem; margin-bottom: 5px; line-height: 1.6; }
+.ft-contact a { color: var(--teal-light); text-decoration: none; }
+.ft-col h4 { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.38); margin-bottom: 18px; }
+.ft-col ul { list-style: none; }
+.ft-col ul li { margin-bottom: 9px; }
+.ft-col ul a { color: rgba(255,255,255,0.58); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; cursor: pointer; }
+.ft-col ul a:hover { color: var(--teal-light); }
+.ft-bottom { border-top: 1px solid rgba(255,255,255,0.09); padding-top: 26px; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; flex-wrap: wrap; gap: 8px; }
+.ft-bottom a { color: var(--teal-light); text-decoration: none; }
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center;
-    padding: 120px 60px 80px;
-    position: relative;
-    overflow: hidden;
-  }
+/* ══════════════════════════════════
+   HOME PAGE
+══════════════════════════════════ */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 120px 60px 80px; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--warm-white) 52%, rgba(42,127,140,0.05) 100%); z-index: 0; }
+.hero-bg::before { content: ''; position: absolute; top: -120px; right: -120px; width: 620px; height: 620px; border-radius: 50%; background: radial-gradient(circle, rgba(42,127,140,0.07) 0%, transparent 68%); }
+.hero-bg::after { content: ''; position: absolute; bottom: -60px; left: 28%; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 68%); }
+.hero-content { position: relative; z-index: 1; padding-right: 56px; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(42,127,140,0.09); border: 1px solid rgba(42,127,140,0.24); color: var(--teal); padding: 6px 16px; border-radius: 100px; font-size: 0.76rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 30px; animation: fadeUp 0.8s ease both; }
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 300; line-height: 1.15; color: var(--navy); margin-bottom: 22px; animation: fadeUp 0.8s 0.1s ease both; }
+.hero h1 em { font-style: italic; color: var(--teal); }
+.hero-desc { font-size: 1.02rem; line-height: 1.78; color: var(--muted); max-width: 430px; margin-bottom: 42px; animation: fadeUp 0.8s 0.2s ease both; }
+.hero-actions { display: flex; gap: 16px; align-items: center; animation: fadeUp 0.8s 0.3s ease both; flex-wrap: wrap; }
+.hero-trust { display: flex; gap: 28px; margin-top: 50px; animation: fadeUp 0.8s 0.4s ease both; flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 10px; }
+.trust-icon { width: 36px; height: 36px; border-radius: 50%; background: rgba(42,127,140,0.1); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; flex-shrink: 0; }
+.trust-label { font-size: 0.81rem; font-weight: 500; color: var(--navy); line-height: 1.3; }
+.trust-sub { font-size: 0.71rem; color: var(--muted); }
+.hero-img-col { position: relative; z-index: 1; animation: fadeIn 1s 0.2s ease both; }
+.hero-img-wrap { position: relative; border-radius: 4px 60px 4px 60px; overflow: hidden; box-shadow: 0 30px 80px rgba(13,27,42,0.18); }
+.hero-img-wrap img { width: 100%; height: 520px; object-fit: cover; display: block; }
+.hero-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,27,42,0.28) 0%, transparent 50%); }
+.hero-img-tag { position: absolute; bottom: 22px; left: 22px; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); padding: 11px 17px; border-radius: 7px; border-left: 3px solid var(--teal); }
+.hero-img-tag strong { display: block; font-size: 0.83rem; color: var(--navy); }
+.hero-img-tag span { font-size: 0.73rem; color: var(--muted); }
+.hero-dot { position: absolute; top: -14px; right: -14px; width: 80px; height: 80px; border-radius: 50%; background: var(--accent); opacity: 0.13; }
 
-  .hero-bg {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, var(--warm-white) 55%, rgba(42,127,140,0.06) 100%);
-    z-index: 0;
-  }
-  .hero-bg::before {
-    content: '';
-    position: absolute; top: -100px; right: -100px;
-    width: 600px; height: 600px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(42,127,140,0.08) 0%, transparent 70%);
-  }
-  .hero-bg::after {
-    content: '';
-    position: absolute; bottom: -80px; left: 30%;
-    width: 400px; height: 400px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,169,110,0.07) 0%, transparent 70%);
-  }
+/* home about strip */
+.home-about { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 80px; padding: 120px 60px; background: var(--navy); position: relative; overflow: hidden; }
+.home-about::before { content: ''; position: absolute; top: -180px; left: -180px; width: 480px; height: 480px; border-radius: 50%; background: radial-gradient(circle, rgba(42,127,140,0.14) 0%, transparent 68%); pointer-events: none; }
+.ha-img { position: relative; z-index: 1; }
+.ha-img-frame { border-radius: 4px 50px 4px 50px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.38); }
+.ha-img-frame img { width: 100%; height: 460px; object-fit: cover; object-position: center top; display: block; }
+.ha-badge { position: absolute; bottom: -18px; right: -18px; background: var(--teal); color: #fff; padding: 18px 22px; border-radius: 8px; text-align: center; box-shadow: 0 10px 28px rgba(42,127,140,0.38); }
+.ha-badge strong { display: block; font-size: 2rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+.ha-badge span { font-size: 0.73rem; letter-spacing: 0.08em; opacity: 0.88; }
+.ha-content { position: relative; z-index: 1; }
+.ha-content h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.1rem, 3.8vw, 2.9rem); font-weight: 300; line-height: 1.2; color: #fff; margin-bottom: 22px; }
+.ha-content h2 em { font-style: italic; color: var(--teal-light); }
+.ha-content p { font-size: 0.97rem; line-height: 1.82; color: rgba(255,255,255,0.63); margin-bottom: 18px; }
 
-  .hero-content { position: relative; z-index: 1; padding-right: 60px; }
+/* home services preview */
+.home-services { padding: 110px 60px; background: var(--cream); }
+.sec-header { text-align: center; margin-bottom: 64px; }
+.sec-header h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 2.9rem); font-weight: 300; color: var(--navy); margin-bottom: 14px; }
+.sec-header p { color: var(--muted); font-size: 0.97rem; max-width: 480px; margin: 0 auto; }
+.srv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.srv-card { background: var(--warm-white); border-radius: 4px; padding: 40px 34px; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; border: 1px solid transparent; }
+.srv-card:hover { transform: translateY(-5px); box-shadow: 0 18px 55px rgba(13,27,42,0.1); border-color: rgba(42,127,140,0.18); }
+.srv-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--teal); transition: height 0.4s; }
+.srv-card:hover::before { height: 100%; }
+.srv-icon { width: 50px; height: 50px; border-radius: 11px; background: rgba(42,127,140,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 22px; }
+.srv-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 500; color: var(--navy); margin-bottom: 12px; }
+.srv-card p { font-size: 0.91rem; line-height: 1.76; color: var(--muted); }
 
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(42,127,140,0.1); border: 1px solid rgba(42,127,140,0.25);
-    color: var(--teal); padding: 6px 16px; border-radius: 100px;
-    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-    margin-bottom: 32px;
-    animation: fadeUp 0.8s ease both;
-  }
-  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+/* ══════════════════════════════════
+   ABOUT PAGE
+══════════════════════════════════ */
+.about-hero { padding: 160px 60px 0; background: var(--navy); position: relative; overflow: hidden; }
+.about-hero::before { content: ''; position: absolute; top: -120px; right: -120px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(42,127,140,0.12) 0%, transparent 65%); pointer-events: none; }
+.about-hero-inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; max-width: 1200px; margin: 0 auto; }
+.about-hero-text { padding-bottom: 80px; }
+.about-hero-text h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 5vw, 4rem); font-weight: 300; line-height: 1.15; color: #fff; margin-bottom: 22px; }
+.about-hero-text h1 em { font-style: italic; color: var(--teal-light); }
+.about-hero-text p { font-size: 1.02rem; line-height: 1.82; color: rgba(255,255,255,0.62); max-width: 500px; }
+.about-hero-img { position: relative; }
+.about-hero-img img { width: 100%; height: 500px; object-fit: cover; object-position: center top; display: block; border-radius: 6px 6px 0 0; filter: brightness(0.85); }
+.about-hero-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 50%, var(--navy) 100%); border-radius: 6px 6px 0 0; }
 
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.8rem, 5vw, 4.2rem);
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--navy);
-    margin-bottom: 24px;
-    animation: fadeUp 0.8s 0.1s ease both;
-  }
-  .hero h1 em { font-style: italic; color: var(--teal); }
+.about-bio { padding: 90px 60px; background: var(--warm-white); }
+.about-bio-inner { max-width: 860px; margin: 0 auto; }
+.about-bio-inner h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 2.7rem); font-weight: 300; color: var(--navy); margin-bottom: 28px; line-height: 1.2; }
+.about-bio-inner h2 em { font-style: italic; color: var(--teal); }
+.about-bio-inner p { font-size: 1rem; line-height: 1.88; color: var(--muted); margin-bottom: 22px; }
+.about-bio-inner p:last-child { margin-bottom: 0; }
 
-  .hero p {
-    font-size: 1.05rem; line-height: 1.75; color: var(--muted);
-    max-width: 440px; margin-bottom: 44px;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
+.about-info { background: var(--cream); padding: 80px 60px; }
+.about-info-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; max-width: 1100px; margin: 0 auto; }
+.info-block { background: var(--warm-white); border-radius: 6px; padding: 36px 32px; border-top: 3px solid var(--teal); box-shadow: 0 4px 20px rgba(13,27,42,0.05); }
+.info-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; color: var(--navy); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.info-block h3 .ico { font-size: 1.1rem; }
+.hours-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid rgba(42,127,140,0.1); font-size: 0.9rem; }
+.hours-row:last-child { border-bottom: none; }
+.hours-row .day { color: var(--text); font-weight: 500; }
+.hours-row .time { color: var(--muted); }
+.hours-row.closed .time { color: #b5665e; }
+.info-block address { font-style: normal; font-size: 0.92rem; line-height: 1.8; color: var(--muted); }
+.info-block .phone-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 1.1rem; font-weight: 600; color: var(--teal); text-decoration: none; letter-spacing: 0.02em; }
+.info-block .phone-link:hover { color: var(--navy); }
+.info-block .map-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 0.84rem; color: var(--teal); text-decoration: none; transition: gap 0.2s; }
+.info-block .map-link:hover { gap: 9px; }
 
-  .hero-actions {
-    display: flex; gap: 16px; align-items: center;
-    animation: fadeUp 0.8s 0.3s ease both;
-  }
+/* ══════════════════════════════════
+   SERVICES PAGE
+══════════════════════════════════ */
+.srv-hero { padding: 150px 60px 88px; background: var(--navy); position: relative; overflow: hidden; text-align: center; }
+.srv-hero::before { content: ''; position: absolute; top: -140px; left: 50%; transform: translateX(-50%); width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(42,127,140,0.14) 0%, transparent 64%); pointer-events: none; }
+.srv-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(42,127,140,0.35), transparent); }
+.srv-hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+.srv-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.7rem, 5vw, 3.9rem); font-weight: 300; line-height: 1.15; color: #fff; margin-bottom: 20px; }
+.srv-hero h1 em { font-style: italic; color: var(--teal-light); }
+.srv-hero p { font-size: 1.02rem; line-height: 1.82; color: rgba(255,255,255,0.58); max-width: 570px; margin: 0 auto; }
 
-  .btn-primary {
-    background: var(--teal); color: #fff;
-    padding: 14px 32px; border-radius: 2px;
-    text-decoration: none; font-size: 0.88rem; font-weight: 500;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
-    box-shadow: 0 4px 20px rgba(42,127,140,0.25);
-  }
-  .btn-primary:hover { background: var(--navy); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,27,42,0.2); }
+.srv-full { padding: 90px 60px; background: var(--warm-white); display: flex; flex-direction: column; gap: 3px; }
+.srv-row { display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border-radius: 4px; }
+.srv-row.rev { direction: rtl; }
+.srv-row.rev > * { direction: ltr; }
+.srv-content { padding: 60px 56px; background: var(--cream); display: flex; flex-direction: column; justify-content: center; position: relative; }
+.srv-content::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--teal); }
+.srv-row.rev .srv-content::before { left: auto; right: 0; }
+.srv-num { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; font-weight: 300; color: rgba(42,127,140,0.1); line-height: 1; margin-bottom: 6px; display: block; }
+.srv-content h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.85rem; font-weight: 500; color: var(--navy); margin-bottom: 14px; line-height: 1.2; }
+.srv-content > p { font-size: 0.94rem; line-height: 1.82; color: var(--muted); margin-bottom: 16px; }
+.srv-content ul { list-style: none; }
+.srv-content ul li { font-size: 0.91rem; color: var(--muted); padding: 4px 0; display: flex; align-items: center; gap: 10px; }
+.srv-content ul li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--teal); flex-shrink: 0; }
+.srv-visual { position: relative; overflow: hidden; min-height: 360px; }
+.sv-bg { position: absolute; inset: 0; }
+.sv-msk { background: linear-gradient(135deg,#0c2030 0%,#183a4a 60%,#0c2234 100%); }
+.sv-abd { background: linear-gradient(135deg,#142030 0%,#1d3444 60%,#102228 100%); }
+.sv-sml { background: linear-gradient(135deg,#0e1d2c 0%,#1a2f3e 60%,#0b1e2b 100%); }
+.sv-vas { background: linear-gradient(135deg,#0f1f2e 0%,#163040 60%,#0b1c2a 100%); }
+.sv-pel { background: linear-gradient(135deg,#111e30 0%,#1c3448 60%,#0f2030 100%); }
+.sv-sft { background: linear-gradient(135deg,#0d1d2c 0%,#193140 60%,#0b1d2a 100%); }
+.sv-inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.sv-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(42,127,140,0.18); top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.sv-r1 { width: 170px; height: 170px; }
+.sv-r2 { width: 280px; height: 280px; }
+.sv-r3 { width: 390px; height: 390px; opacity: 0.5; }
+.sv-icon { position: relative; z-index: 1; text-align: center; }
+.sv-icon .big { font-size: 4.8rem; display: block; margin-bottom: 12px; filter: drop-shadow(0 0 26px rgba(42,127,140,0.5)); }
+.sv-icon .lbl { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: rgba(255,255,255,0.42); letter-spacing: 0.13em; text-transform: uppercase; }
 
-  .btn-secondary {
-    color: var(--navy); text-decoration: none;
-    font-size: 0.88rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-    display: flex; align-items: center; gap: 8px;
-    transition: gap 0.2s, color 0.2s;
-  }
-  .btn-secondary::after { content: '→'; transition: transform 0.2s; }
-  .btn-secondary:hover { color: var(--teal); gap: 12px; }
-  .btn-secondary:hover::after { transform: translateX(2px); }
+.referrals { background: var(--cream); padding: 88px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 68px; align-items: center; }
+.ref-content h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.75rem, 2.8vw, 2.35rem); font-weight: 300; color: var(--navy); margin-bottom: 14px; line-height: 1.2; }
+.ref-content p { font-size: 0.95rem; line-height: 1.82; color: var(--muted); margin-bottom: 10px; }
+.ref-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 26px; }
+.ref-cards { display: flex; flex-direction: column; gap: 16px; }
+.ref-card { background: var(--warm-white); border-radius: 7px; padding: 20px 24px; display: flex; align-items: flex-start; gap: 14px; border-left: 3px solid var(--teal); box-shadow: 0 3px 14px rgba(13,27,42,0.05); }
+.ref-card-ico { width: 40px; height: 40px; border-radius: 9px; background: rgba(42,127,140,0.1); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; }
+.ref-card h4 { font-size: 0.9rem; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+.ref-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+.ref-card a { color: var(--teal); text-decoration: none; font-weight: 500; }
 
-  .hero-trust {
-    display: flex; gap: 32px; margin-top: 52px;
-    animation: fadeUp 0.8s 0.4s ease both;
-  }
-  .trust-item { display: flex; align-items: center; gap: 10px; }
-  .trust-icon {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: rgba(42,127,140,0.1);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1rem;
-  }
-  .trust-label { font-size: 0.82rem; font-weight: 500; color: var(--navy); line-height: 1.3; }
-  .trust-sub { font-size: 0.72rem; color: var(--muted); }
+/* ══════════════════════════════════
+   REFERRAL FORM PAGE
+══════════════════════════════════ */
+.rf-hero { padding: 150px 60px 80px; background: var(--navy); position: relative; overflow: hidden; }
+.rf-hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 550px; height: 550px; border-radius: 50%; background: radial-gradient(circle, rgba(42,127,140,0.13) 0%, transparent 65%); pointer-events: none; }
+.rf-hero-inner { position: relative; z-index: 1; max-width: 680px; }
+.rf-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 4.5vw, 3.6rem); font-weight: 300; line-height: 1.15; color: #fff; margin-bottom: 18px; }
+.rf-hero h1 em { font-style: italic; color: var(--teal-light); }
+.rf-hero p { font-size: 1rem; line-height: 1.82; color: rgba(255,255,255,0.6); max-width: 520px; }
 
-  .hero-image {
-    position: relative; z-index: 1;
-    animation: fadeIn 1s 0.2s ease both;
-  }
-  .hero-image-wrap {
-    position: relative;
-    border-radius: 4px 60px 4px 60px;
-    overflow: hidden;
-    box-shadow: 0 30px 80px rgba(13,27,42,0.18);
-  }
-  .hero-image-wrap img { width: 100%; height: 520px; object-fit: cover; display: block; }
-  .hero-image-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(13,27,42,0.3) 0%, transparent 50%);
-  }
-  .hero-image-tag {
-    position: absolute; bottom: 24px; left: 24px;
-    background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
-    padding: 12px 18px; border-radius: 8px;
-    border-left: 3px solid var(--teal);
-  }
-  .hero-image-tag strong { display: block; font-size: 0.85rem; color: var(--navy); }
-  .hero-image-tag span { font-size: 0.75rem; color: var(--muted); }
+.rf-body { padding: 80px 60px; background: var(--warm-white); display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+.rf-sidebar h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.7rem; font-weight: 400; color: var(--navy); margin-bottom: 16px; line-height: 1.25; }
+.rf-sidebar p { font-size: 0.93rem; line-height: 1.82; color: var(--muted); margin-bottom: 28px; }
+.rf-sidebar-cards { display: flex; flex-direction: column; gap: 14px; }
+.rf-side-card { background: var(--cream); border-radius: 7px; padding: 18px 20px; display: flex; align-items: flex-start; gap: 12px; }
+.rf-side-card .ico { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.rf-side-card h4 { font-size: 0.88rem; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+.rf-side-card p { font-size: 0.83rem; color: var(--muted); line-height: 1.55; margin-bottom: 0; }
 
-  .hero-accent-dot {
-    position: absolute; top: -12px; right: -12px;
-    width: 80px; height: 80px; border-radius: 50%;
-    background: var(--accent); opacity: 0.15;
-  }
+.rf-form { background: var(--cream); border-radius: 8px; padding: 48px 44px; box-shadow: 0 6px 30px rgba(13,27,42,0.07); }
+.rf-form h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.65rem; font-weight: 500; color: var(--navy); margin-bottom: 8px; }
+.rf-form .sub { font-size: 0.88rem; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
+.rf-form .sub a { color: var(--teal); text-decoration: none; }
+.form-section-title { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 28px 0 16px; padding-bottom: 8px; border-bottom: 1px solid rgba(200,169,110,0.25); display: flex; align-items: center; gap: 8px; }
+.form-section-title::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-group label { font-size: 0.82rem; font-weight: 500; color: var(--text); letter-spacing: 0.03em; }
+.form-group label .req { color: var(--teal); }
+.form-group input, .form-group select, .form-group textarea {
+  padding: 11px 14px; border: 1.5px solid rgba(42,127,140,0.22); border-radius: 4px;
+  font-size: 0.92rem; font-family: inherit; color: var(--text); background: var(--warm-white);
+  transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(42,127,140,0.1); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(107,128,145,0.6); }
+.form-submit { margin-top: 28px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.form-submit .privacy { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+.form-success { display: none; background: rgba(42,127,140,0.1); border: 1px solid rgba(42,127,140,0.3); border-radius: 6px; padding: 18px 20px; margin-top: 20px; text-align: center; }
+.form-success p { color: var(--teal); font-size: 0.93rem; font-weight: 500; }
 
-  /* ── ABOUT ── */
-  .about {
-    display: grid; grid-template-columns: 1fr 1fr;
-    align-items: center; gap: 80px;
-    padding: 120px 60px;
-    background: var(--navy);
-    position: relative; overflow: hidden;
-  }
-  .about::before {
-    content: '';
-    position: absolute; top: -200px; left: -200px;
-    width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(42,127,140,0.15) 0%, transparent 70%);
-  }
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-  .about-images { position: relative; z-index: 1; }
-  .about-img-main {
-    border-radius: 4px 50px 4px 50px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  }
-  .about-img-main img { width: 100%; height: 480px; object-fit: cover; object-position: center top; display: block; }
-  .about-img-badge {
-    position: absolute; bottom: -20px; right: -20px;
-    background: var(--teal); color: #fff;
-    padding: 20px 24px; border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(42,127,140,0.4);
-  }
-  .about-img-badge strong { display: block; font-size: 2rem; font-family: 'Cormorant Garamond', serif; font-weight: 600; }
-  .about-img-badge span { font-size: 0.75rem; letter-spacing: 0.08em; opacity: 0.9; }
-
-  .about-content { position: relative; z-index: 1; }
-  .section-label {
-    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 16px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .section-label::before { content: ''; width: 30px; height: 1px; background: var(--accent); }
-
-  .about-content h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.2rem, 4vw, 3rem);
-    font-weight: 300; line-height: 1.2;
-    color: #fff; margin-bottom: 24px;
-  }
-  .about-content h2 em { font-style: italic; color: var(--teal-light); }
-  .about-content p {
-    font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.65);
-    margin-bottom: 36px;
-  }
-  .btn-outline {
-    display: inline-flex; align-items: center; gap: 10px;
-    border: 1px solid rgba(42,127,140,0.5); color: var(--teal-light);
-    padding: 12px 28px; border-radius: 2px;
-    text-decoration: none; font-size: 0.88rem; font-weight: 500;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    transition: all 0.25s;
-  }
-  .btn-outline:hover { background: var(--teal); border-color: var(--teal); color: #fff; }
-
-  /* ── SERVICES ── */
-  .services { padding: 120px 60px; background: var(--cream); }
-  .section-header { text-align: center; margin-bottom: 72px; }
-  .section-header h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3rem); font-weight: 300;
-    color: var(--navy); margin-bottom: 16px;
-  }
-  .section-header p { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto; }
-
-  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-
-  .service-card {
-    background: var(--warm-white); border-radius: 4px;
-    padding: 44px 36px;
-    position: relative; overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    border: 1px solid transparent;
-  }
-  .service-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 60px rgba(13,27,42,0.1);
-    border-color: rgba(42,127,140,0.2);
-  }
-  .service-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0;
-    width: 3px; height: 0; background: var(--teal);
-    transition: height 0.4s;
-  }
-  .service-card:hover::before { height: 100%; }
-
-  .service-icon {
-    width: 52px; height: 52px; border-radius: 12px;
-    background: rgba(42,127,140,0.1);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; margin-bottom: 24px;
-  }
-  .service-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem; font-weight: 500; color: var(--navy);
-    margin-bottom: 14px;
-  }
-  .service-card p { font-size: 0.93rem; line-height: 1.75; color: var(--muted); }
-
-  /* ── CTA BANNER ── */
-  .cta-banner {
-    background: var(--teal);
-    padding: 80px 60px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: relative; overflow: hidden;
-  }
-  .cta-banner::before {
-    content: '';
-    position: absolute; right: -100px; top: -100px;
-    width: 400px; height: 400px; border-radius: 50%;
-    background: rgba(255,255,255,0.06);
-  }
-  .cta-banner::after {
-    content: '';
-    position: absolute; left: 30%; bottom: -80px;
-    width: 250px; height: 250px; border-radius: 50%;
-    background: rgba(13,27,42,0.1);
-  }
-  .cta-text { position: relative; z-index: 1; }
-  .cta-text h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 300;
-    color: #fff; margin-bottom: 8px;
-  }
-  .cta-text p { color: rgba(255,255,255,0.75); font-size: 1rem; }
-
-  .btn-white {
-    background: #fff; color: var(--teal);
-    padding: 16px 36px; border-radius: 2px;
-    text-decoration: none; font-size: 0.88rem; font-weight: 600;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    transition: all 0.25s; white-space: nowrap;
-    position: relative; z-index: 1;
-    box-shadow: 0 4px 20px rgba(13,27,42,0.15);
-  }
-  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(13,27,42,0.25); }
-
-  /* ── FOOTER ── */
-  footer {
-    background: var(--navy); color: rgba(255,255,255,0.6);
-    padding: 72px 60px 40px;
-  }
-  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
-
-  .footer-brand h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; font-weight: 400; color: #fff; margin-bottom: 14px;
-  }
-  .footer-brand p { font-size: 0.9rem; line-height: 1.7; max-width: 280px; }
-  .footer-contact { margin-top: 24px; }
-  .footer-contact p { font-size: 0.88rem; margin-bottom: 6px; }
-  .footer-contact a { color: var(--teal-light); text-decoration: none; }
-
-  .footer-col h4 {
-    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
-    color: rgba(255,255,255,0.4); margin-bottom: 20px;
-  }
-  .footer-col ul { list-style: none; }
-  .footer-col ul li { margin-bottom: 10px; }
-  .footer-col ul a {
-    color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem;
-    transition: color 0.2s;
-  }
-  .footer-col ul a:hover { color: var(--teal-light); }
-
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 28px;
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 0.82rem;
-  }
-  .footer-bottom a { color: var(--teal-light); text-decoration: none; }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .reveal {
-    opacity: 0; transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 16px 24px; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; }
-    .hero-content { padding-right: 0; }
-    .hero-image { display: none; }
-    .about { grid-template-columns: 1fr; padding: 80px 24px; gap: 50px; }
-    .about-images { display: none; }
-    .services { padding: 80px 24px; }
-    .services-grid { grid-template-columns: 1fr; }
-    .cta-banner { flex-direction: column; gap: 32px; padding: 60px 24px; text-align: center; }
-    .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-    footer { padding: 60px 24px 32px; }
-  }
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  nav { padding: 14px 22px; }
+  .nav-links { display: none; }
+  .hero, .home-about, .about-hero-inner, .rf-body { grid-template-columns: 1fr; padding-left: 22px; padding-right: 22px; gap: 40px; }
+  .hero { padding-top: 100px; padding-bottom: 60px; }
+  .hero-content { padding-right: 0; }
+  .hero-img-col, .ha-img { display: none; }
+  .home-about { padding: 70px 22px; }
+  .home-services, .srv-full { padding: 70px 22px; }
+  .srv-grid { grid-template-columns: 1fr; }
+  .cta-strip { flex-direction: column; gap: 28px; padding: 56px 22px; text-align: center; }
+  footer { padding: 56px 22px 30px; }
+  .ft-grid { grid-template-columns: 1fr; gap: 36px; }
+  .about-hero { padding: 110px 22px 0; }
+  .about-hero-img { display: none; }
+  .about-bio { padding: 60px 22px; }
+  .about-info { padding: 60px 22px; }
+  .about-info-grid { grid-template-columns: 1fr; }
+  .srv-hero { padding: 110px 22px 60px; }
+  .srv-row { grid-template-columns: 1fr; }
+  .srv-row.rev { direction: ltr; }
+  .srv-visual { min-height: 200px; }
+  .srv-content { padding: 36px 24px; }
+  .referrals { grid-template-columns: 1fr; padding: 60px 22px; gap: 36px; }
+  .rf-hero { padding: 110px 22px 60px; }
+  .rf-body { padding: 60px 22px; }
+  .rf-form { padding: 30px 22px; }
+  .form-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ══ NAV ══ -->
 <nav id="navbar">
-  <a href="#" class="nav-logo">
+  <div class="nav-logo" onclick="nav('home')">
     <div class="nav-logo-circle">
-      <img src="UltrasoundStudioLogo.png" alt="Logo" onerror="this.style.display='none'">
+      <img src="UltraSoundStudioLogo.png" alt="Logo" onerror="this.style.display='none'">
     </div>
-    <div class="nav-logo-text">
-      The Ultrasound Studio
-      <span>Diagnostic Radiography</span>
-    </div>
-  </a>
+    <div class="nav-logo-text">The Ultrasound Studio<span>Diagnostic Radiography</span></div>
+  </div>
   <ul class="nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About Us</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="nav-cta" target="_blank">Book Now</a></li>
+    <li><a id="nl-home" class="active-link" onclick="nav('home')">Home</a></li>
+    <li><a id="nl-about" onclick="nav('about')">About Us</a></li>
+    <li class="nav-dd">
+      <a id="nl-services" onclick="nav('services')">Services <span class="chevron">▾</span></a>
+      <div class="nav-dd-menu">
+        <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book</a>
+        <a onclick="nav('referral')">Submit Referral</a>
+      </div>
+    </li>
+    <li><a class="nav-book" href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Now</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-badge">HPCSA Registered Sonographer</div>
-    <h1>Professional<br>Diagnostic<br><em>Imaging You Can Trust</em></h1>
-    <p>Accurate, high-quality ultrasound services delivered with care, precision, and over 20 years of professional experience.</p>
-    <div class="hero-actions">
-      <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-primary" target="_blank">Book an Appointment</a>
-      <a href="#services" class="btn-secondary">See Services</a>
-    </div>
-    <div class="hero-trust">
-      <div class="trust-item">
-        <div class="trust-icon">✓</div>
-        <div>
-          <div class="trust-label">HPCSA Registered</div>
-          <div class="trust-sub">Fully accredited</div>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">✓</div>
-        <div>
-          <div class="trust-label">Qualified Radiographer</div>
-          <div class="trust-sub">20+ years experience</div>
-        </div>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">✓</div>
-        <div>
-          <div class="trust-label">Medical Aid Claims</div>
-          <div class="trust-sub">All major schemes</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="hero-image">
-    <div style="position:relative;">
-      <div class="hero-accent-dot"></div>
-      <div class="hero-image-wrap">
-        <img src="https://static.wixstatic.com/media/11062b_b8f1525441e74a238d9d2fe73c60bd54~mv2.jpeg" alt="Ultrasound Examination">
-        <div class="hero-image-overlay"></div>
-        <div class="hero-image-tag">
-          <strong>State-of-the-art Equipment</strong>
-          <span>Blouberg, Cape Town</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-images reveal">
-    <div class="about-img-main">
-      <img src="https://static.wixstatic.com/media/3bdab7_d3f0a321b11a4b7bad8fa584d2a20cc7~mv2.jpg" alt="Lynne Marais">
-    </div>
-    <div class="about-img-badge">
-      <strong>20+</strong>
-      <span>Years of Experience</span>
-    </div>
-  </div>
-  <div class="about-content reveal">
-    <div class="section-label">About Us</div>
-    <h2>Committed to<br><em>Accurate & Ethical</em><br>Medical Imaging</h2>
-    <p>Hi, I'm Lynne Marais, a Diagnostic Sonographer based in Blouberg, Cape Town. With over 20 years of experience, I provide high-quality ultrasound examinations with a strong focus on patient comfort, care, and a personal touch.</p>
-    <p style="margin-top: -12px;">The Ultrasound Studio provides professional diagnostic radiography services with a strong focus on accuracy, patient comfort, and ethical practice. We work closely with referring healthcare professionals to support reliable diagnosis and quality patient care.</p>
-    <a href="#" class="btn-outline">Learn More About the Practice →</a>
-  </div>
-</section>
+<!-- ══════════════════════════════════
+     HOME
+══════════════════════════════════ -->
+<div id="page-home" class="page active">
 
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="section-header reveal">
-    <div class="section-label" style="justify-content:center;">Our Services</div>
-    <h2>What We Offer</h2>
-    <p>Comprehensive ultrasound imaging services delivered with precision and care.</p>
-  </div>
-  <div class="services-grid">
-    <div class="service-card reveal">
-      <div class="service-icon">🦴</div>
-      <h3>Musculoskeletal Ultrasound</h3>
-      <p>Ultrasound assessment of joints and soft tissues, including shoulders, knees, ankles, tendons, ligaments, and muscles. Commonly used for sports injuries, pain, inflammation, or limited movement.</p>
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-badge">HPCSA Registered Sonographer</div>
+      <h1>Professional<br>Diagnostic<br><em>Imaging You Can Trust</em></h1>
+      <p class="hero-desc">Accurate, high-quality ultrasound services delivered with care, precision, and over 20 years of professional experience.</p>
+      <div class="hero-actions">
+        <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-primary" target="_blank">Book an Appointment</a>
+        <button class="btn-ghost" onclick="nav('services')">See Services</button>
+      </div>
+      <div class="hero-trust">
+        <div class="trust-item"><div class="trust-icon">✓</div><div><div class="trust-label">HPCSA Registered</div><div class="trust-sub">Fully accredited</div></div></div>
+        <div class="trust-item"><div class="trust-icon">✓</div><div><div class="trust-label">Qualified Radiographer</div><div class="trust-sub">20+ years experience</div></div></div>
+        <div class="trust-item"><div class="trust-icon">✓</div><div><div class="trust-label">Medical Aid Claims</div><div class="trust-sub">All major schemes</div></div></div>
+      </div>
     </div>
-    <div class="service-card reveal" style="transition-delay:0.1s">
-      <div class="service-icon">🫁</div>
-      <h3>Abdominal Ultrasound</h3>
-      <p>Comprehensive ultrasound imaging of abdominal organs, performed with accuracy, care, and attention to patient comfort. Detailed evaluation for accurate clinical diagnosis.</p>
+    <div class="hero-img-col">
+      <div style="position:relative">
+        <div class="hero-dot"></div>
+        <div class="hero-img-wrap">
+          <img src="https://static.wixstatic.com/media/11062b_b8f1525441e74a238d9d2fe73c60bd54~mv2.jpeg" alt="Ultrasound Examination">
+          <div class="hero-img-overlay"></div>
+          <div class="hero-img-tag"><strong>State-of-the-art Equipment</strong><span>Blouberg, Cape Town</span></div>
+        </div>
+      </div>
     </div>
-    <div class="service-card reveal" style="transition-delay:0.2s">
-      <div class="service-icon">🫀</div>
-      <h3>Vascular Ultrasound</h3>
-      <p>Specialised ultrasound studies to assess blood flow and circulation, including carotid, venous, and arterial scans. Essential for diagnosing vascular conditions.</p>
-    </div>
-  </div>
-  <div style="text-align:center; margin-top:48px;" class="reveal">
-    <a href="#" class="btn-primary">See All Services →</a>
-  </div>
-</section>
+  </section>
 
-<!-- CTA BANNER -->
-<div class="cta-banner">
-  <div class="cta-text">
-    <h2>Ready to Make a Booking?</h2>
-    <p>Schedule your appointment online — quick, easy, and at your convenience.</p>
+  <section class="home-about">
+    <div class="ha-img reveal">
+      <div class="ha-img-frame"><img src="https://static.wixstatic.com/media/3bdab7_d3f0a321b11a4b7bad8fa584d2a20cc7~mv2.jpg" alt="Lynne Marais"></div>
+      <div class="ha-badge"><strong>20+</strong><span>Years Experience</span></div>
+    </div>
+    <div class="ha-content reveal">
+      <div class="sec-label">About Us</div>
+      <h2>Committed to<br><em>Accurate & Ethical</em><br>Medical Imaging</h2>
+      <p>Hi, I'm Lynne Marais, a Diagnostic Sonographer based at Intercare Blaauwberg in Cape Town. With over 20 years of experience, I provide high-quality ultrasound examinations with a strong focus on patient comfort, care, and a personal touch.</p>
+      <p>The Ultrasound Studio works closely with referring healthcare professionals to support reliable diagnosis and quality patient care.</p>
+      <button class="btn-outline-light" onclick="nav('about')">Learn More About the Practice →</button>
+    </div>
+  </section>
+
+  <section class="home-services">
+    <div class="sec-header reveal">
+      <div class="sec-label" style="justify-content:center;">Our Services</div>
+      <h2>What We Offer</h2>
+      <p>Comprehensive diagnostic ultrasound services delivered with precision, care, and professionalism.</p>
+    </div>
+    <div class="srv-grid">
+      <div class="srv-card reveal">
+        <div class="srv-icon">🦴</div>
+        <h3>Musculoskeletal Ultrasound</h3>
+        <p>Assessment of joints and soft tissues — shoulders, knees, ankles, tendons, ligaments, and muscles. Ideal for sports injuries, pain, and limited movement.</p>
+      </div>
+      <div class="srv-card reveal" style="transition-delay:0.1s">
+        <div class="srv-icon">🫁</div>
+        <h3>Abdominal Ultrasound</h3>
+        <p>Comprehensive imaging of abdominal organs including the liver, gallbladder, kidneys, and spleen performed with accuracy and patient comfort.</p>
+      </div>
+      <div class="srv-card reveal" style="transition-delay:0.2s">
+        <div class="srv-icon">🫀</div>
+        <h3>Vascular Ultrasound</h3>
+        <p>Specialised studies to assess blood flow and circulation, including carotid, venous (DVT), and arterial scans.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:44px" class="reveal">
+      <button class="btn-primary" onclick="nav('services')">See All Services →</button>
+    </div>
+  </section>
+
+  <div class="cta-strip">
+    <div class="cta-strip-text"><h2>Ready to Make a Booking?</h2><p>Schedule your appointment online — quick, easy, and at your convenience.</p></div>
+    <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-white" target="_blank">Book Now</a>
   </div>
-  <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-white" target="_blank">Book Now</a>
+
+  <footer>
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <h3>The Ultrasound Studio</h3>
+        <p>Professional diagnostic sonography in Blouberg, Cape Town. HPCSA registered and committed to ethical, accurate imaging.</p>
+        <div class="ft-contact">
+          <p> <a href="tel:0680928026">068 092 8026</a></p>
+          <p style="margin-top:6px">Unit 10 Intercare Blaauwberg<br>Cnr Links Road, Park Dr, Parklands<br>Cape Town, 7441</p>
+        </div>
+      </div>
+      <div class="ft-col"><h4>Navigation</h4><ul>
+        <li><a onclick="nav('home')">Home</a></li>
+        <li><a onclick="nav('about')">About Us</a></li>
+        <li><a onclick="nav('services')">Services</a></li>
+        <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Appointment</a></li>
+        <li><a onclick="nav('referral')">Submit Referral</a></li>
+      </ul></div>
+      <div class="ft-col"><h4>Connect</h4><ul>
+        <li><a href="#">Facebook</a></li><li><a href="#">Twitter</a></li><li><a href="#">LinkedIn</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bottom"><span>© 2035 The Ultrasound Studio. All rights reserved.</span><span>Designed by <a href="#">Tanit Ansara</a></span></div>
+  </footer>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <h3>The Ultrasound Studio</h3>
-      <p>Professional diagnostic sonography services in Blouberg, Cape Town. HPCSA registered and committed to ethical, accurate imaging.</p>
-      <div class="footer-contact">
-        <p> <a href="tel:0680928026">068 092 8026</a></p>
-        <p style="margin-top:8px; font-size:0.85rem; line-height:1.6;">Unit 10 Intercare Blaauwberg<br>Cnr Links Road, Park Dr<br>Parklands, Cape Town, 7441</p>
+
+<!-- ══════════════════════════════════
+     ABOUT US
+══════════════════════════════════ -->
+<div id="page-about" class="page">
+
+  <section class="about-hero">
+    <div class="about-hero-inner">
+      <div class="about-hero-text">
+        <div class="sec-label" style="color:var(--accent)">All About Me</div>
+        <h1>Hi, I'm<br><em>Lynne Marais</em></h1>
+        <p>A Diagnostic Sonographer based at Intercare Blaauwberg in Cape Town — a wife and a proud mom to the cutest little boy.</p>
+      </div>
+      <div class="about-hero-img">
+        <img src="https://static.wixstatic.com/media/78cc986324bb4af7a2fb2c01dabbfd93.jpg" alt="Echocardiogram Display">
       </div>
     </div>
-    <div class="footer-col">
-      <h4>Navigation</h4>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#services">Services</a></li>
+  </section>
+
+  <section class="about-bio">
+    <div class="about-bio-inner reveal">
+      <div class="sec-label">My Background</div>
+      <h2>Dedicated to <em>Quality</em> Diagnostic Imaging</h2>
+      <p>I obtained my National Diploma in Radiography from the Central University of Technology (CUT) in 2001 and my BTech in Ultrasound from the Cape Peninsula University of Technology (CPUT) in 2003. Over the past 20 years, I've gained extensive experience working in private radiology practices in both Cape Town and Bloemfontein.</p>
+      <p>At The Ultrasound Studio, my focus is on delivering high-quality diagnostic ultrasound examinations in a calm, professional, and caring environment. I believe that excellent imaging goes hand-in-hand with patient comfort, clear communication, and a personal approach — ensuring every patient feels supported and well cared for.</p>
+    </div>
+  </section>
+
+  <section class="about-info">
+    <div class="about-info-grid">
+      <div class="info-block reveal">
+        <h3><span class="ico">🕐</span> Opening Hours</h3>
+        <div class="hours-row"><span class="day">Monday</span><span class="time">9:00 AM – 4:00 PM</span></div>
+        <div class="hours-row"><span class="day">Tuesday</span><span class="time">9:00 AM – 4:00 PM</span></div>
+        <div class="hours-row"><span class="day">Wednesday</span><span class="time">9:00 AM – 4:00 PM</span></div>
+        <div class="hours-row"><span class="day">Thursday</span><span class="time">9:00 AM – 4:00 PM</span></div>
+        <div class="hours-row"><span class="day">Friday</span><span class="time">9:00 AM – 4:00 PM</span></div>
+        <div class="hours-row closed"><span class="day">Saturday</span><span class="time">Closed</span></div>
+        <div class="hours-row closed"><span class="day">Sunday</span><span class="time">Closed</span></div>
+      </div>
+      <div class="info-block reveal" style="transition-delay:0.1s">
+        <h3><span class="ico"></span> Location</h3>
+        <address>Unit 10 Intercare Blaauwberg<br>Cnr Links Road &amp; Park Drive<br>Parklands, Cape Town, 7441</address>
+        <a href="https://maps.google.com" target="_blank" class="map-link">View on Google Maps →</a>
+      </div>
+      <div class="info-block reveal" style="transition-delay:0.2s">
+        <h3><span class="ico"></span> Contact</h3>
+        <p style="font-size:0.91rem;color:var(--muted);line-height:1.7">Call or WhatsApp us to enquire about appointments, referrals, or any questions about our services.</p>
+        <a href="tel:0680928026" class="phone-link">068 092 8026</a>
+        <div style="margin-top:24px;display:flex;flex-direction:column;gap:10px">
+          <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-primary" target="_blank" style="text-align:center">Book Online</a>
+          <button class="btn-ghost" onclick="nav('referral')" style="justify-content:center">Submit a Referral</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-strip">
+    <div class="cta-strip-text"><h2>Ready to Make a Booking?</h2><p>Schedule your appointment online — quick, easy, and at your convenience.</p></div>
+    <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-white" target="_blank">Book Now</a>
+  </div>
+
+  <footer>
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <h3>The Ultrasound Studio</h3>
+        <p>Professional diagnostic sonography in Blouberg, Cape Town. HPCSA registered and committed to ethical, accurate imaging.</p>
+        <div class="ft-contact">
+          <p><a href="tel:0680928026">068 092 8026</a></p>
+          <p style="margin-top:6px">Unit 10 Intercare Blaauwberg<br>Cnr Links Road, Park Dr, Parklands<br>Cape Town, 7441</p>
+        </div>
+      </div>
+      <div class="ft-col"><h4>Navigation</h4><ul>
+        <li><a onclick="nav('home')">Home</a></li>
+        <li><a onclick="nav('about')">About Us</a></li>
+        <li><a onclick="nav('services')">Services</a></li>
         <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Appointment</a></li>
-        <li><a href="#">Submit Referral</a></li>
-      </ul>
+        <li><a onclick="nav('referral')">Submit Referral</a></li>
+      </ul></div>
+      <div class="ft-col"><h4>Connect</h4><ul>
+        <li><a href="#">Facebook</a></li><li><a href="#">Twitter</a></li><li><a href="#">LinkedIn</a></li>
+      </ul></div>
     </div>
-    <div class="footer-col">
-      <h4>Connect</h4>
-      <ul>
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">LinkedIn</a></li>
-      </ul>
+    <div class="ft-bottom"><span>© 2035 The Ultrasound Studio. All rights reserved.</span><span>Designed by <a href="#">Tanit Ansara</a></span></div>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════
+     SERVICES
+══════════════════════════════════ -->
+<div id="page-services" class="page">
+
+  <section class="srv-hero">
+    <div class="srv-hero-inner">
+      <div class="sec-label" style="justify-content:center;margin-bottom:18px;">What We Offer</div>
+      <h1>Our <em>Diagnostic</em><br>Ultrasound Services</h1>
+      <p style="margin-top:18px">At The Ultrasound Studio, we offer a range of general diagnostic ultrasound examinations performed with precision, care, and a personal approach. All scans are conducted in a calm and professional environment, with patient comfort as a priority.</p>
     </div>
+  </section>
+
+  <section class="srv-full">
+
+    <div class="srv-row reveal">
+      <div class="srv-content">
+        <span class="srv-num">01</span>
+        <h2>Musculoskeletal Ultrasound</h2>
+        <p>Ultrasound assessment of joints and soft tissues. Commonly used for sports injuries, pain, inflammation, or limited movement.</p>
+        <ul><li>Shoulders &amp; rotator cuff</li><li>Knees &amp; ankles</li><li>Tendons &amp; ligaments</li><li>Muscles &amp; soft tissue</li></ul>
+      </div>
+      <div class="srv-visual"><div class="sv-bg sv-msk"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🦴</span><span class="lbl">Musculoskeletal</span></div></div></div>
+    </div>
+
+    <div class="srv-row rev reveal">
+      <div class="srv-content">
+        <span class="srv-num">02</span>
+        <h2>Abdominal Ultrasound</h2>
+        <p>An ultrasound examination of the abdominal organs. Commonly used to investigate abdominal pain, swelling, or abnormal blood results.</p>
+        <ul><li>Liver &amp; gallbladder</li><li>Pancreas &amp; spleen</li><li>Kidneys &amp; bladder</li><li>Abdominal aorta</li></ul>
+      </div>
+      <div class="srv-visual"><div class="sv-bg sv-abd"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🫁</span><span class="lbl">Abdominal</span></div></div></div>
+    </div>
+
+    <div class="srv-row reveal">
+      <div class="srv-content">
+        <span class="srv-num">03</span>
+        <h2>Small Parts Ultrasound</h2>
+        <p>High-resolution imaging of smaller anatomical areas. These examinations assist in evaluating lumps, swelling, or areas of concern.</p>
+        <ul><li>Breast</li><li>Thyroid</li><li>Scrotum</li></ul>
+      </div>
+      <div class="srv-visual"><div class="sv-bg sv-sml"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🔬</span><span class="lbl">Small Parts</span></div></div></div>
+    </div>
+
+    <div class="srv-row rev reveal">
+      <div class="srv-content">
+        <span class="srv-num">04</span>
+        <h2>Vascular Ultrasound</h2>
+        <p>Non-invasive ultrasound studies to assess blood flow and circulation. Used to investigate circulation problems, blockages, or vascular disease.</p>
+        <ul><li>Carotid artery studies</li><li>Venous studies (e.g. DVT assessment)</li><li>Arterial studies</li></ul>
+      </div>
+      <div class="srv-visual"><div class="sv-bg sv-vas"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🫀</span><span class="lbl">Vascular</span></div></div></div>
+    </div>
+
+    <div class="srv-row reveal">
+      <div class="srv-content">
+        <span class="srv-num">05</span>
+        <h2>Pelvic &amp; Gynaecological Ultrasound</h2>
+        <p>Assessment of the pelvic organs, including the uterus, ovaries, and surrounding structures. Used to evaluate pelvic pain, menstrual irregularities, or other gynaecological concerns.</p>
+        <ul><li>Uterus &amp; endometrium</li><li>Ovaries &amp; adnexa</li><li>Pelvic pain investigation</li><li>Menstrual irregularities</li></ul>
+      </div>
+      <div class="srv-visual"><div class="sv-bg sv-pel"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🩻</span><span class="lbl">Pelvic</span></div></div></div>
+    </div>
+
+    <div class="srv-row rev reveal">
+      <div class="srv-content">
+        <span class="srv-num">06</span>
+        <h2>Soft Tissue Ultrasound</h2>
+        <p>Evaluation of superficial soft tissue areas, including lumps, bumps, cysts, and swellings. This scan helps determine the nature of soft tissue abnormalities.</p>
+        <ul><li>Lumps &amp; bumps</li><li>Cysts &amp; lipomas</li><li>Superficial swellings</li><li>Soft tissue masses</li></ul>
+      </div>
+      <div class="srv-visual"><div class="sv-bg sv-sft"></div><div class="sv-inner"><div class="sv-ring sv-r1"></div><div class="sv-ring sv-r2"></div><div class="sv-ring sv-r3"></div><div class="sv-icon"><span class="big">🧬</span><span class="lbl">Soft Tissue</span></div></div></div>
+    </div>
+
+  </section>
+
+  <section class="referrals" id="referrals-anchor">
+    <div class="ref-content reveal">
+      <div class="sec-label">Bookings &amp; Referrals</div>
+      <h2>Referrals and Bookings</h2>
+      <p>Some ultrasound examinations require a referral from a healthcare provider. If you are unsure, please contact the practice before booking.</p>
+      <p>Appointments can be booked online or by calling <strong style="color:var(--navy)">068 092 8026</strong>.</p>
+      <div class="ref-actions">
+        <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-primary" target="_blank">Book Online</a>
+        <button class="btn-ghost" onclick="nav('referral')">Submit a Referral</button>
+      </div>
+    </div>
+    <div class="ref-cards reveal" style="transition-delay:0.12s">
+      <div class="ref-card"><div class="ref-card-ico">📋</div><div><h4>Do I need a referral?</h4><p>Some scans require a referral letter from your GP or specialist. Contact us if you're unsure before booking.</p></div></div>
+      <div class="ref-card"><div class="ref-card-ico">💳</div><div><h4>Medical Aid Accepted</h4><p>We accept most major medical aid schemes. Please have your membership details ready when booking.</p></div></div>
+      <div class="ref-card"><div class="ref-card-ico">📍</div><div><h4>Where to Find Us</h4><p>Unit 10 Intercare Blaauwberg, Cnr Links Road &amp; Park Dr, Parklands, Cape Town. <a href="tel:0680928026">068 092 8026</a></p></div></div>
+    </div>
+  </section>
+
+  <div class="cta-strip">
+    <div class="cta-strip-text"><h2>Ready to Make a Booking?</h2><p>Schedule your appointment online — quick, easy, and at your convenience.</p></div>
+    <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-white" target="_blank">Book Now</a>
   </div>
-  <div class="footer-bottom">
-    <span>© 2025 The Ultrasound Studio. All rights reserved.</span>
-    <span>Designed by <a href="#">Tanit Ansara</a></span>
+
+  <footer>
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <h3>The Ultrasound Studio</h3>
+        <p>Professional diagnostic sonography in Blouberg, Cape Town. HPCSA registered and committed to ethical, accurate imaging.</p>
+        <div class="ft-contact">
+          <p>📞 <a href="tel:0680928026">068 092 8026</a></p>
+          <p style="margin-top:6px">Unit 10 Intercare Blaauwberg<br>Cnr Links Road, Park Dr, Parklands<br>Cape Town, 7441</p>
+        </div>
+      </div>
+      <div class="ft-col"><h4>Navigation</h4><ul>
+        <li><a onclick="nav('home')">Home</a></li>
+        <li><a onclick="nav('about')">About Us</a></li>
+        <li><a onclick="nav('services')">Services</a></li>
+        <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Appointment</a></li>
+        <li><a onclick="nav('referral')">Submit Referral</a></li>
+      </ul></div>
+      <div class="ft-col"><h4>Connect</h4><ul>
+        <li><a href="#">Facebook</a></li><li><a href="#">Twitter</a></li><li><a href="#">LinkedIn</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bottom"><span>© 2035 The Ultrasound Studio. All rights reserved.</span><span>Designed by <a href="#">Tanit Ansara</a></span></div>
+  </footer>
+</div>
+
+
+<!-- ══════════════════════════════════
+     SUBMIT REFERRAL
+══════════════════════════════════ -->
+<div id="page-referral" class="page">
+
+  <section class="rf-hero">
+    <div class="rf-hero-inner">
+      <div class="sec-label">For Healthcare Professionals</div>
+      <h1>Working With<br><em>Medical Professionals</em></h1>
+      <p style="margin-top:18px">We value our professional relationships with doctors and healthcare providers. Our practice offers high-quality ultrasound imaging with detailed reports to assist in accurate diagnosis and patient management. All studies are performed with clinical precision and reported promptly.</p>
+    </div>
+  </section>
+
+  <section class="rf-body">
+    <div class="rf-sidebar reveal">
+      <div class="sec-label">Why Refer to Us</div>
+      <h2>Precise Imaging.<br>Prompt Reports.</h2>
+      <p>We work closely with referring healthcare professionals to deliver high-quality diagnostic ultrasound examinations and accurate, timely reports.</p>
+      <div class="rf-sidebar-cards">
+        <div class="rf-side-card"><span class="ico">🏥</span><div><h4>HPCSA Registered</h4><p>Fully accredited with over 20 years of diagnostic experience.</p></div></div>
+        <div class="rf-side-card"><span class="ico">📄</span><div><h4>Detailed Reports</h4><p>Comprehensive, promptly delivered reports to support clinical decision-making.</p></div></div>
+        <div class="rf-side-card"><span class="ico">🔒</span><div><h4>POPIA Compliant</h4><p>All patient information is handled confidentially in accordance with POPIA regulations.</p></div></div>
+        <div class="rf-side-card"><span class="ico">💳</span><div><h4>Medical Aid Claims</h4><p>We accept most major medical aid schemes on behalf of your patients.</p></div></div>
+      </div>
+    </div>
+
+    <div class="rf-form reveal" style="transition-delay:0.12s">
+      <h2>Doctor Referral Submission</h2>
+      <p class="sub">Please complete the form below to refer a patient for diagnostic ultrasound imaging. All information submitted is handled confidentially in accordance with <a href="#">POPIA regulations</a>.</p>
+
+      <form id="referralForm" onsubmit="submitForm(event)">
+        <div class="form-section-title">Referring Doctor Details</div>
+        <div class="form-grid">
+          <div class="form-group full"><label>Referring Doctor Full Name <span class="req">*</span></label><input type="text" placeholder="Dr. Jane Smith" required></div>
+          <div class="form-group"><label>Practice Name</label><input type="text" placeholder="Smith Medical Practice"></div>
+          <div class="form-group"><label>Practice Number (HPCSA / Practice Code)</label><input type="text" placeholder="PR0000000"></div>
+          <div class="form-group"><label>Email Address <span class="req">*</span></label><input type="email" placeholder="doctor@practice.co.za" required></div>
+          <div class="form-group"><label>Phone <span class="req">*</span></label><input type="tel" placeholder="021 000 0000" required></div>
+          <div class="form-group full"><label>Practice Address <span class="req">*</span></label><input type="text" placeholder="123 Medical Street, Cape Town" required></div>
+        </div>
+
+        <div class="form-section-title">Patient Details</div>
+        <div class="form-grid">
+          <div class="form-group"><label>Patient Full Name <span class="req">*</span></label><input type="text" placeholder="Patient name" required></div>
+          <div class="form-group"><label>Patient Date of Birth <span class="req">*</span></label><input type="date" required></div>
+          <div class="form-group"><label>Patient Contact Number</label><input type="tel" placeholder="082 000 0000"></div>
+          <div class="form-group"><label>Medical Aid Scheme</label><input type="text" placeholder="e.g. Discovery Health"></div>
+          <div class="form-group"><label>Medical Aid Number</label><input type="text" placeholder="Membership number"></div>
+        </div>
+
+        <div class="form-section-title">Referral Details</div>
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Ultrasound Examination Required <span class="req">*</span></label>
+            <select required>
+              <option value="" disabled selected>Select examination type</option>
+              <option>Musculoskeletal Ultrasound</option>
+              <option>Abdominal Ultrasound</option>
+              <option>Small Parts Ultrasound (Breast / Thyroid / Scrotum)</option>
+              <option>Vascular Ultrasound</option>
+              <option>Pelvic &amp; Gynaecological Ultrasound</option>
+              <option>Soft Tissue Ultrasound</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group full"><label>Clinical Indication / Reason for Referral <span class="req">*</span></label><textarea placeholder="Please provide relevant clinical history and reason for referral..." required></textarea></div>
+          <div class="form-group full"><label>Urgency</label>
+            <select>
+              <option value="routine" selected>Routine</option>
+              <option value="urgent">Urgent</option>
+              <option value="semi-urgent">Semi-Urgent</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn-primary">Submit Referral</button>
+          <p class="privacy">All information is handled in accordance<br>with POPIA regulations.</p>
+        </div>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <p>✅ &nbsp;Thank you! Your referral has been submitted successfully. We will be in touch shortly.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-strip">
+    <div class="cta-strip-text"><h2>Need to Book Directly?</h2><p>Patients can also book their appointment online without a referral for most examinations.</p></div>
+    <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" class="btn-white" target="_blank">Book Online</a>
   </div>
-</footer>
+
+  <footer>
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <h3>The Ultrasound Studio</h3>
+        <p>Professional diagnostic sonography in Blouberg, Cape Town. HPCSA registered and committed to ethical, accurate imaging.</p>
+        <div class="ft-contact">
+          <p> <a href="tel:0680928026">068 092 8026</a></p>
+          <p style="margin-top:6px">Unit 10 Intercare Blaauwberg<br>Cnr Links Road, Park Dr, Parklands<br>Cape Town, 7441</p>
+        </div>
+      </div>
+      <div class="ft-col"><h4>Navigation</h4><ul>
+        <li><a onclick="nav('home')">Home</a></li>
+        <li><a onclick="nav('about')">About Us</a></li>
+        <li><a onclick="nav('services')">Services</a></li>
+        <li><a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank">Book Appointment</a></li>
+        <li><a onclick="nav('referral')">Submit Referral</a></li>
+      </ul></div>
+      <div class="ft-col"><h4>Connect</h4><ul>
+        <li><a href="#">Facebook</a></li><li><a href="#">Twitter</a></li><li><a href="#">LinkedIn</a></li>
+      </ul></div>
+    </div>
+    <div class="ft-bottom"><span>© 2035 The Ultrasound Studio. All rights reserved.</span><span>Designed by <a href="#">Tanit Ansara</a></span></div>
+  </footer>
+</div>
+
 
 <script>
-  // Scroll nav shadow
-  const navbar = document.getElementById('navbar');
+  /* ── NAVIGATION ── */
+  function nav(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // active nav link
+    document.querySelectorAll('.nav-links > li > a[id^="nl-"]').forEach(a => a.classList.remove('active-link'));
+    const t = document.getElementById('nl-' + id);
+    if (t) t.classList.add('active-link');
+    else if (id === 'referral') {
+      const s = document.getElementById('nl-services');
+      if (s) s.classList.add('active-link');
+    }
+    setTimeout(triggerReveals, 80);
+  }
+
+  /* ── SCROLL NAV SHADOW ── */
   window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 20);
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  // Reveal on scroll
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.15 });
-  reveals.forEach(el => observer.observe(el));
+  /* ── REVEAL ON SCROLL ── */
+  function triggerReveals() {
+    const els = document.querySelectorAll('.page.active .reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    els.forEach(el => { el.classList.remove('visible'); obs.observe(el); });
+  }
+  triggerReveals();
+
+  /* ── REFERRAL FORM ── */
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('referralForm').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
 </script>
 </body>
 </html>
