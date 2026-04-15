@@ -229,25 +229,20 @@ tailwind.config = {
               <p class="text-[0.6rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.22em] text-secondary-container">The Human Lens</p>
               <p class="text-[0.55rem] sm:text-[0.6rem] uppercase tracking-[0.2em] text-on-primary/60 mt-1">Est. 2024 · Cape Town</p>
             </div>
-            <!-- centred mark — offset upward to clear floating Location card -->
-            <div class="absolute inset-x-0 top-0 bottom-[38%] sm:bottom-[32%] flex flex-col items-center justify-center text-center px-6">
+            <!-- centred mark -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
               <span class="material-symbols-outlined text-secondary-container/80 mb-4" style="font-size:clamp(2.5rem,5vw,3.5rem)">stethoscope</span>
               <p class="font-headline text-on-primary fluid-h3 leading-tight max-w-[14ch]">Clarity in <span class="italic text-secondary-container">every</span> image.</p>
               <div class="w-12 h-[2px] bg-secondary-container/60 mt-5"></div>
               <p class="text-on-primary/70 text-xs sm:text-sm mt-4 max-w-[22ch] leading-relaxed">Diagnostic sonography delivered with care and precision.</p>
             </div>
-            <!-- floating data card — repositions inside the image on mobile -->
-            <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 lg:-left-6 glass-card p-4 sm:p-5 rounded-lg shadow-xl max-w-[78%] sm:max-w-[240px]">
-              <div class="flex items-center gap-3 sm:gap-4 mb-2">
-                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-primary flex items-center justify-center text-on-primary shrink-0">
-                  <span class="material-symbols-outlined text-base">verified</span>
-                </div>
-                <div class="min-w-0">
-                  <p class="text-[0.65rem] font-bold text-on-surface-variant uppercase tracking-[0.18em]">Location</p>
-                  <p class="text-sm sm:text-base font-headline text-primary leading-tight">Blouberg, Cape Town</p>
-                </div>
+            <!-- bottom editorial footer -->
+            <div class="absolute bottom-0 left-0 right-0 px-6 sm:px-8 py-4 sm:py-5 flex items-center justify-between border-t border-secondary-container/20 bg-gradient-to-t from-black/20 to-transparent">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-secondary-container text-base">location_on</span>
+                <span class="text-on-primary text-xs sm:text-sm font-medium">Blouberg, Cape Town</span>
               </div>
-              <p class="text-xs text-on-surface-variant leading-relaxed hidden sm:block">High-resolution diagnostic imaging in a calm, professional setting.</p>
+              <span class="text-secondary-container text-[0.6rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.2em]">HPCSA</span>
             </div>
           </div>
         </div>
