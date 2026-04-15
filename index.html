@@ -100,6 +100,10 @@ tailwind.config = {
   .fluid-section { padding-top: clamp(4rem, 8vw, 7rem); padding-bottom: clamp(4rem, 8vw, 7rem); }
   .fluid-pad-x   { padding-left: clamp(1.25rem, 4vw, 2.5rem); padding-right: clamp(1.25rem, 4vw, 2.5rem); }
 
+  /* Testimonial carousel */
+  .testimonial-slide { display: none; opacity: 0; transition: opacity .4s ease; }
+  .testimonial-slide.active { display: block; opacity: 1; }
+
   /* Prevent absolute-positioned floating cards from overflowing tight viewports */
   @media (max-width: 640px) {
     .float-card-mobile-static { position: static !important; margin-top: 1rem; max-width: 100% !important; }
@@ -154,95 +158,61 @@ tailwind.config = {
   <main class="pt-24">
 
     <!-- HERO -->
-    <section class="relative flex items-center overflow-hidden pt-8 sm:pt-12 pb-16 lg:pb-24">
-      <!-- decorative background -->
-      <div class="hidden lg:block absolute top-0 right-0 w-1/3 h-full bg-surface-container-low -z-20"></div>
-      <div class="absolute -top-32 -right-32 w-[clamp(220px,40vw,460px)] h-[clamp(220px,40vw,460px)] bg-secondary-container rounded-full blob-bg pointer-events-none"></div>
-      <div class="absolute bottom-10 left-1/4 w-[clamp(180px,30vw,340px)] h-[clamp(180px,30vw,340px)] bg-tertiary rounded-full blob-bg pointer-events-none"></div>
+    <section class="relative overflow-hidden pt-12 sm:pt-16 lg:pt-24 pb-16 lg:pb-28">
+      <!-- Decorative organic blob composition -->
+      <div class="absolute -top-40 -right-40 w-[clamp(280px,55vw,720px)] h-[clamp(280px,55vw,720px)] bg-secondary-container rounded-full blob-bg pointer-events-none"></div>
+      <div class="absolute -bottom-32 -left-32 w-[clamp(240px,40vw,520px)] h-[clamp(240px,40vw,520px)] bg-tertiary/40 rounded-full blob-bg pointer-events-none"></div>
+      <div class="absolute top-1/3 right-1/4 w-[clamp(180px,25vw,340px)] h-[clamp(180px,25vw,340px)] bg-primary/10 organic-blob-2 rotate-45 pointer-events-none hidden md:block"></div>
 
-      <div class="max-w-7xl mx-auto fluid-pad-x w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
-        <div class="lg:col-span-7 space-y-6 sm:space-y-7">
-          <div class="inline-flex items-center gap-2 px-4 py-2 bg-tertiary/10 rounded-full">
-            <span class="w-2 h-2 rounded-full bg-tertiary shrink-0"></span>
-            <span class="text-tertiary font-semibold uppercase fluid-eyebrow">HPCSA Registered Sonographer</span>
-          </div>
-          <h1 class="font-headline fluid-display text-primary">
-            Precision through<br>
-            <span class="italic text-on-surface-variant">The Human Lens</span>
-          </h1>
-          <p class="fluid-lead text-on-surface-variant max-w-xl">
-            Accurate, high-quality diagnostic ultrasound delivered with care, calm, and over 20 years of clinical experience — based at Intercare Blaauwberg in Cape Town.
-          </p>
-          <div class="flex flex-row flex-wrap gap-3 sm:gap-5 pt-2 items-center">
-            <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener"
-               class="bg-primary text-on-primary px-5 sm:px-9 py-3 sm:py-4 rounded-full text-sm sm:text-base font-bold shadow-xl shadow-primary/25 hover:translate-y-[-2px] transition-all whitespace-nowrap">
-              Book an Appointment
-            </a>
-            <button onclick="nav('services')" class="flex items-center gap-2 sm:gap-3 text-primary font-bold group text-sm sm:text-base whitespace-nowrap">
-              <span class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-surface-container-high group-hover:bg-secondary-container transition-colors shrink-0">
-                <span class="material-symbols-outlined">arrow_forward</span>
-              </span>
-              See our services
-            </button>
-          </div>
-
-          <!-- trust strip -->
-          <div class="flex flex-wrap gap-x-6 sm:gap-x-8 gap-y-4 pt-6 sm:pt-8">
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-primary">verified</span>
-              <div>
-                <div class="text-sm font-semibold text-on-surface">HPCSA Registered</div>
-                <div class="text-xs text-on-surface-variant">Fully accredited</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-primary">workspace_premium</span>
-              <div>
-                <div class="text-sm font-semibold text-on-surface">20+ Years Experience</div>
-                <div class="text-xs text-on-surface-variant">Qualified radiographer</div>
-              </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <span class="material-symbols-outlined text-primary">credit_card</span>
-              <div>
-                <div class="text-sm font-semibold text-on-surface">Medical Aid Accepted</div>
-                <div class="text-xs text-on-surface-variant">All major schemes</div>
-              </div>
-            </div>
-          </div>
+      <div class="max-w-5xl mx-auto fluid-pad-x w-full relative z-10 text-center">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-tertiary/10 rounded-full mb-7 sm:mb-9">
+          <span class="w-2 h-2 rounded-full bg-tertiary shrink-0"></span>
+          <span class="text-tertiary font-semibold uppercase fluid-eyebrow">HPCSA Registered Sonographer</span>
         </div>
 
-        <!-- HERO IMAGERY -->
-        <div class="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-none">
-          <div class="absolute inset-0 organic-blob-1 bg-secondary-container/40 -rotate-12 scale-110 -z-10"></div>
-          <div class="absolute inset-0 organic-blob-2 bg-tertiary/10 rotate-45 scale-125 -z-10"></div>
-          <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary via-primary to-[#004f4f]">
-            <!-- decorative serif mark -->
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="font-headline italic text-secondary-container/15 select-none leading-none" style="font-size:clamp(12rem,28vw,22rem)">L</span>
+        <h1 class="font-headline fluid-display text-primary mb-6 sm:mb-8 max-w-4xl mx-auto">
+          Precision through<br>
+          <span class="italic text-on-surface-variant">The Human Lens</span>
+        </h1>
+
+        <p class="fluid-lead text-on-surface-variant max-w-2xl mx-auto mb-8 sm:mb-10">
+          Accurate, high-quality diagnostic ultrasound delivered with care, calm, and over 20 years of clinical experience — based at Intercare Blaauwberg in Cape Town.
+        </p>
+
+        <div class="flex flex-row flex-wrap justify-center gap-3 sm:gap-5 items-center mb-12 sm:mb-16">
+          <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener"
+             class="bg-primary text-on-primary px-6 sm:px-9 py-3 sm:py-4 rounded-full text-sm sm:text-base font-bold shadow-xl shadow-primary/25 hover:translate-y-[-2px] transition-all whitespace-nowrap">
+            Book an Appointment
+          </a>
+          <button onclick="nav('services')" class="flex items-center gap-2 sm:gap-3 text-primary font-bold group text-sm sm:text-base whitespace-nowrap">
+            <span class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-surface-container-high group-hover:bg-secondary-container transition-colors shrink-0">
+              <span class="material-symbols-outlined">arrow_forward</span>
+            </span>
+            See our services
+          </button>
+        </div>
+
+        <!-- trust strip -->
+        <div class="flex flex-wrap justify-center gap-x-6 sm:gap-x-10 lg:gap-x-14 gap-y-5 pt-8 sm:pt-10 border-t border-outline-variant/30 max-w-3xl mx-auto">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">verified</span>
+            <div class="text-left">
+              <div class="text-sm font-semibold text-on-surface">HPCSA Registered</div>
+              <div class="text-xs text-on-surface-variant">Fully accredited</div>
             </div>
-            <!-- soft inner blob accents -->
-            <div class="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-secondary-container/20 blur-2xl"></div>
-            <div class="absolute -bottom-16 -left-12 w-64 h-64 rounded-full bg-tertiary/25 blur-3xl"></div>
-            <!-- editorial label top-right -->
-            <div class="absolute top-5 right-5 sm:top-7 sm:right-7 text-right">
-              <p class="text-[0.6rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.22em] text-secondary-container">The Human Lens</p>
-              <p class="text-[0.55rem] sm:text-[0.6rem] uppercase tracking-[0.2em] text-on-primary/60 mt-1">Est. 2024 · Cape Town</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">workspace_premium</span>
+            <div class="text-left">
+              <div class="text-sm font-semibold text-on-surface">20+ Years Experience</div>
+              <div class="text-xs text-on-surface-variant">Qualified radiographer</div>
             </div>
-            <!-- centred mark -->
-            <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-              <span class="material-symbols-outlined text-secondary-container/80 mb-4" style="font-size:clamp(2.5rem,5vw,3.5rem)">stethoscope</span>
-              <p class="font-headline text-on-primary fluid-h3 leading-tight max-w-[14ch]">Clarity in <span class="italic text-secondary-container">every</span> image.</p>
-              <div class="w-12 h-[2px] bg-secondary-container/60 mt-5"></div>
-              <p class="text-on-primary/70 text-xs sm:text-sm mt-4 max-w-[22ch] leading-relaxed">Diagnostic sonography delivered with care and precision.</p>
-            </div>
-            <!-- bottom editorial footer -->
-            <div class="absolute bottom-0 left-0 right-0 px-6 sm:px-8 py-4 sm:py-5 flex items-center justify-between border-t border-secondary-container/20 bg-gradient-to-t from-black/20 to-transparent">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-secondary-container text-base">location_on</span>
-                <span class="text-on-primary text-xs sm:text-sm font-medium">Blouberg, Cape Town</span>
-              </div>
-              <span class="text-secondary-container text-[0.6rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.2em]">HPCSA</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">credit_card</span>
+            <div class="text-left">
+              <div class="text-sm font-semibold text-on-surface">Medical Aid Accepted</div>
+              <div class="text-xs text-on-surface-variant">All major schemes</div>
             </div>
           </div>
         </div>
@@ -408,27 +378,72 @@ tailwind.config = {
     <!-- Asymmetric visual -->
     <section class="max-w-7xl mx-auto fluid-pad-x py-10 sm:py-12">
       <div class="grid grid-cols-12 gap-6 lg:gap-8">
-        <div class="col-span-12 md:col-span-7 aspect-[4/3] rounded-xl overflow-hidden shadow-2xl reveal relative bg-gradient-to-br from-primary via-[#005757] to-[#003e3e]">
+        <div class="col-span-12 md:col-span-7 rounded-xl overflow-hidden shadow-2xl reveal relative bg-gradient-to-br from-primary via-[#005757] to-[#003e3e] p-7 sm:p-9 lg:p-11 min-h-[380px] sm:min-h-[420px] flex flex-col">
           <!-- Soft accents -->
-          <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full bg-secondary-container/15 blur-3xl"></div>
-          <div class="absolute -bottom-20 -right-16 w-80 h-80 rounded-full bg-tertiary/20 blur-3xl"></div>
-          <!-- Decorative serif initial -->
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <span class="font-headline italic text-secondary-container/10 select-none leading-none" style="font-size:clamp(14rem,30vw,26rem)">U</span>
+          <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full bg-secondary-container/15 blur-3xl pointer-events-none"></div>
+          <div class="absolute -bottom-20 -right-16 w-80 h-80 rounded-full bg-tertiary/20 blur-3xl pointer-events-none"></div>
+
+          <!-- Header -->
+          <div class="relative flex items-center justify-between mb-6 sm:mb-8">
+            <div>
+              <p class="text-[0.6rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.22em] text-secondary-container">What Patients Say</p>
+              <div class="w-10 h-[2px] bg-secondary-container/60 mt-2"></div>
+            </div>
+            <div class="flex items-center gap-1 text-secondary-container">
+              <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1">star</span>
+              <span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1">star</span>
+            </div>
           </div>
-          <!-- Editorial label -->
-          <div class="absolute top-6 left-6 sm:top-8 sm:left-8">
-            <p class="text-[0.6rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.22em] text-secondary-container">Our Approach</p>
-            <div class="w-10 h-[2px] bg-secondary-container/60 mt-2"></div>
+
+          <!-- Reviews carousel -->
+          <div class="relative flex-1 flex flex-col justify-center">
+            <span class="material-symbols-outlined text-secondary-container/50 mb-3" style="font-size:clamp(2rem,3.5vw,2.75rem)">format_quote</span>
+
+            <!-- Slides -->
+            <div class="testimonial-stage relative">
+              <div class="testimonial-slide active" data-slide="0">
+                <p class="font-headline italic text-on-primary leading-snug mb-5" style="font-size:clamp(1.1rem,1.8vw,1.4rem)">The Ultrasound Studio is outstanding. An excellent communicator, friendly and welcoming, with clear expertise in her field. She genuinely cares about patients, even calling me back to double-check results, showing real commitment to wellbeing. Super impressed and would highly recommend!</p>
+                <div class="border-t border-secondary-container/20 pt-4">
+                  <p class="text-secondary-container font-bold text-sm">Bruce Geldart</p>
+                  <p class="text-on-primary/50 text-[0.65rem] uppercase tracking-[0.18em] mt-1">Google Local Guide</p>
+                </div>
+              </div>
+
+              <div class="testimonial-slide" data-slide="1">
+                <p class="font-headline italic text-on-primary leading-snug mb-5" style="font-size:clamp(1.1rem,1.8vw,1.4rem)">As a Sports Chiropractor I don't send my patients anywhere else but to Lynne. She is incredibly knowledgeable, professional and thorough. I highly recommend The Ultrasound Studio, the best in the business!</p>
+                <div class="border-t border-secondary-container/20 pt-4">
+                  <p class="text-secondary-container font-bold text-sm">Tristan Koekemoer</p>
+                  <p class="text-on-primary/50 text-[0.65rem] uppercase tracking-[0.18em] mt-1">Sports Chiropractor</p>
+                </div>
+              </div>
+
+              <div class="testimonial-slide" data-slide="2">
+                <p class="font-headline italic text-on-primary leading-snug mb-5" style="font-size:clamp(1.1rem,1.8vw,1.4rem)">Amazing service from Lynne. She is professional, thorough and it's clear that her work is her passion. I highly recommend her.</p>
+                <div class="border-t border-secondary-container/20 pt-4">
+                  <p class="text-secondary-container font-bold text-sm">Bernard Tome</p>
+                  <p class="text-on-primary/50 text-[0.65rem] uppercase tracking-[0.18em] mt-1">Google Review</p>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- Quote -->
-          <div class="absolute inset-0 flex items-center justify-center px-8 sm:px-12 lg:px-16">
-            <div class="text-center max-w-md">
-              <span class="material-symbols-outlined text-secondary-container/70 mb-4" style="font-size:clamp(2rem,4vw,2.75rem)">format_quote</span>
-              <p class="font-headline italic text-on-primary leading-snug" style="font-size:clamp(1.5rem,3vw,2.25rem)">
-                Imaging that's <span class="text-secondary-container">accurate</span>, ethical, and delivered with care.
-              </p>
-              <p class="text-on-primary/60 text-xs sm:text-sm uppercase tracking-[0.2em] mt-6">— The Ultrasound Studio</p>
+
+          <!-- Controls -->
+          <div class="relative flex items-center justify-between mt-6 sm:mt-8 pt-5 border-t border-secondary-container/15">
+            <div class="flex gap-2">
+              <button class="testimonial-dot w-2 h-2 rounded-full bg-secondary-container transition-all" data-dot="0" aria-label="Review 1"></button>
+              <button class="testimonial-dot w-2 h-2 rounded-full bg-secondary-container/30 transition-all" data-dot="1" aria-label="Review 2"></button>
+              <button class="testimonial-dot w-2 h-2 rounded-full bg-secondary-container/30 transition-all" data-dot="2" aria-label="Review 3"></button>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="prevTestimonial()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-secondary-container/30 text-secondary-container hover:bg-secondary-container hover:text-primary transition-all flex items-center justify-center" aria-label="Previous review">
+                <span class="material-symbols-outlined text-base">arrow_back</span>
+              </button>
+              <button onclick="nextTestimonial()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-secondary-container/30 text-secondary-container hover:bg-secondary-container hover:text-primary transition-all flex items-center justify-center" aria-label="Next review">
+                <span class="material-symbols-outlined text-base">arrow_forward</span>
+              </button>
             </div>
           </div>
         </div>
@@ -859,6 +874,29 @@ function toggleMobileMenu() {
   const open = menu.classList.toggle('hidden');
   icon.textContent = open ? 'menu' : 'close';
 }
+
+// Testimonial carousel
+let currentTestimonial = 0;
+const totalTestimonials = 3;
+function showTestimonial(i) {
+  currentTestimonial = (i + totalTestimonials) % totalTestimonials;
+  document.querySelectorAll('.testimonial-slide').forEach(s => {
+    s.classList.toggle('active', parseInt(s.dataset.slide) === currentTestimonial);
+  });
+  document.querySelectorAll('.testimonial-dot').forEach(d => {
+    const isActive = parseInt(d.dataset.dot) === currentTestimonial;
+    d.classList.toggle('bg-secondary-container', isActive);
+    d.classList.toggle('bg-secondary-container/30', !isActive);
+    d.classList.toggle('w-6', isActive);
+    d.classList.toggle('w-2', !isActive);
+  });
+}
+function nextTestimonial() { showTestimonial(currentTestimonial + 1); }
+function prevTestimonial() { showTestimonial(currentTestimonial - 1); }
+document.addEventListener('click', (e) => {
+  const dot = e.target.closest('.testimonial-dot');
+  if (dot) showTestimonial(parseInt(dot.dataset.dot));
+});
 
 function triggerReveals() {
   const els = document.querySelectorAll('.page.active .reveal');
