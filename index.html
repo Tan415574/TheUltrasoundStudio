@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>The Ultrasound Studio — Diagnostic Sonography, Cape Town</title>
-<link rel="icon" type="image/png" href="https://static.wixstatic.com/media/3bdab7_23a7ebfc17054017adf71c41b48c406c~mv2.png">
+<link rel="icon" type="image/png" href="images/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -113,7 +113,7 @@ tailwind.config = {
   <nav class="flex justify-between items-center w-full fluid-pad-x py-4 sm:py-5 max-w-7xl mx-auto gap-3">
     <button onclick="nav('home')" class="flex items-center gap-3 group min-w-0">
       <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white border border-primary/15 overflow-hidden flex items-center justify-center shrink-0">
-        <img src="https://static.wixstatic.com/media/3bdab7_23a7ebfc17054017adf71c41b48c406c~mv2.png" alt="" class="w-full h-full object-cover" onerror="this.style.display='none'">
+        <img src="images/logo.png" alt="" class="w-full h-full object-cover" onerror="this.style.display='none'">
       </div>
       <div class="text-left leading-tight min-w-0">
         <div class="font-headline font-bold text-primary text-sm sm:text-base lg:text-lg truncate">The Ultrasound Studio</div>
@@ -173,13 +173,13 @@ tailwind.config = {
           <p class="fluid-lead text-on-surface-variant max-w-xl">
             Accurate, high-quality diagnostic ultrasound delivered with care, calm, and over 20 years of clinical experience — based at Intercare Blaauwberg in Cape Town.
           </p>
-          <div class="flex flex-wrap gap-4 sm:gap-5 pt-2 items-center">
+          <div class="flex flex-row flex-wrap gap-3 sm:gap-5 pt-2 items-center">
             <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener"
-               class="bg-primary text-on-primary px-7 sm:px-9 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold shadow-xl shadow-primary/25 hover:translate-y-[-2px] transition-all">
+               class="bg-primary text-on-primary px-5 sm:px-9 py-3 sm:py-4 rounded-full text-sm sm:text-base font-bold shadow-xl shadow-primary/25 hover:translate-y-[-2px] transition-all whitespace-nowrap">
               Book an Appointment
             </a>
-            <button onclick="nav('services')" class="flex items-center gap-3 text-primary font-bold group text-sm sm:text-base">
-              <span class="w-11 h-11 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-surface-container-high group-hover:bg-secondary-container transition-colors">
+            <button onclick="nav('services')" class="flex items-center gap-2 sm:gap-3 text-primary font-bold group text-sm sm:text-base whitespace-nowrap">
+              <span class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-surface-container-high group-hover:bg-secondary-container transition-colors shrink-0">
                 <span class="material-symbols-outlined">arrow_forward</span>
               </span>
               See our services
@@ -216,8 +216,26 @@ tailwind.config = {
         <div class="lg:col-span-5 relative w-full max-w-md mx-auto lg:max-w-none">
           <div class="absolute inset-0 organic-blob-1 bg-secondary-container/40 -rotate-12 scale-110 -z-10"></div>
           <div class="absolute inset-0 organic-blob-2 bg-tertiary/10 rotate-45 scale-125 -z-10"></div>
-          <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl">
-            <img src="https://static.wixstatic.com/media/11062b_b8f1525441e74a238d9d2fe73c60bd54~mv2.jpeg" alt="Diagnostic ultrasound" class="w-full h-full object-cover">
+          <div class="relative w-full aspect-[4/5] rounded-xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary via-primary to-[#004f4f]">
+            <!-- decorative serif mark -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="font-headline italic text-secondary-container/15 select-none leading-none" style="font-size:clamp(12rem,28vw,22rem)">L</span>
+            </div>
+            <!-- soft inner blob accents -->
+            <div class="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-secondary-container/20 blur-2xl"></div>
+            <div class="absolute -bottom-16 -left-12 w-64 h-64 rounded-full bg-tertiary/25 blur-3xl"></div>
+            <!-- editorial label top-right -->
+            <div class="absolute top-5 right-5 sm:top-7 sm:right-7 text-right">
+              <p class="text-[0.6rem] sm:text-[0.65rem] font-bold uppercase tracking-[0.22em] text-secondary-container">The Human Lens</p>
+              <p class="text-[0.55rem] sm:text-[0.6rem] uppercase tracking-[0.2em] text-on-primary/60 mt-1">Est. 2024 · Cape Town</p>
+            </div>
+            <!-- centred mark — offset upward to clear floating Location card -->
+            <div class="absolute inset-x-0 top-0 bottom-[38%] sm:bottom-[32%] flex flex-col items-center justify-center text-center px-6">
+              <span class="material-symbols-outlined text-secondary-container/80 mb-4" style="font-size:clamp(2.5rem,5vw,3.5rem)">stethoscope</span>
+              <p class="font-headline text-on-primary fluid-h3 leading-tight max-w-[14ch]">Clarity in <span class="italic text-secondary-container">every</span> image.</p>
+              <div class="w-12 h-[2px] bg-secondary-container/60 mt-5"></div>
+              <p class="text-on-primary/70 text-xs sm:text-sm mt-4 max-w-[22ch] leading-relaxed">Diagnostic sonography delivered with care and precision.</p>
+            </div>
             <!-- floating data card — repositions inside the image on mobile -->
             <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 lg:-left-6 glass-card p-4 sm:p-5 rounded-lg shadow-xl max-w-[78%] sm:max-w-[240px]">
               <div class="flex items-center gap-3 sm:gap-4 mb-2">
@@ -256,25 +274,38 @@ tailwind.config = {
               <h3 class="font-headline fluid-h3 mb-3 text-on-surface group-hover:text-on-primary transition-colors">Musculoskeletal &amp; Soft Tissue</h3>
               <p class="fluid-body text-on-surface-variant group-hover:text-primary-fixed transition-colors">Real-time assessment of joints, tendons, ligaments, lumps, and swellings — ideal for sports injuries, pain investigation, and limited movement.</p>
             </div>
-            <button onclick="nav('services')" class="relative z-10 self-start mt-6 sm:mt-8 w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-primary group-hover:border-on-primary flex items-center justify-center group-hover:bg-on-primary group-hover:text-primary transition-all">
-              <span class="material-symbols-outlined">arrow_forward</span>
-            </button>
+            <div class="relative z-10 mt-6 sm:mt-8 flex items-center gap-4">
+              <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener"
+                 class="inline-flex items-center gap-2 bg-primary group-hover:bg-on-primary text-on-primary group-hover:text-primary px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-sm font-bold transition-all whitespace-nowrap">
+                <span class="material-symbols-outlined text-base">event</span>
+                Book Scan
+              </a>
+              <button onclick="nav('services')" class="text-primary group-hover:text-on-primary font-bold text-sm hover:underline transition-colors whitespace-nowrap">Learn more →</button>
+            </div>
           </div>
 
           <!-- Side stack -->
           <div class="md:col-span-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-5 lg:gap-6">
-            <div class="bg-secondary-container rounded-lg p-7 lg:p-8 flex flex-col justify-between gap-6 reveal min-h-[180px]">
+            <div class="bg-secondary-container rounded-lg p-7 lg:p-8 flex flex-col justify-between gap-5 reveal min-h-[180px]">
               <span class="material-symbols-outlined text-on-secondary-container" style="font-size:clamp(2rem,3vw,2.5rem)">monitor_heart</span>
               <div>
                 <h3 class="font-headline text-xl lg:text-2xl text-on-secondary-container mb-2">Vascular</h3>
-                <p class="text-sm text-on-secondary-container/80 leading-relaxed">Carotid, venous, and arterial studies to assess blood flow and circulation.</p>
+                <p class="text-sm text-on-secondary-container/80 leading-relaxed mb-3">Carotid, venous, and arterial studies to assess blood flow and circulation.</p>
+                <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener"
+                   class="inline-flex items-center gap-1.5 text-on-secondary-container font-bold text-sm hover:gap-2.5 transition-all">
+                  Book Scan <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </a>
               </div>
             </div>
-            <div class="bg-surface-container-highest rounded-lg p-7 lg:p-8 flex flex-col justify-between gap-6 reveal min-h-[180px]">
+            <div class="bg-surface-container-highest rounded-lg p-7 lg:p-8 flex flex-col justify-between gap-5 reveal min-h-[180px]">
               <span class="material-symbols-outlined text-primary" style="font-size:clamp(2rem,3vw,2.5rem)">stethoscope</span>
               <div>
                 <h3 class="font-headline text-xl lg:text-2xl text-primary mb-2">Abdominal</h3>
-                <p class="text-sm text-on-surface-variant leading-relaxed">Liver, gallbladder, kidneys, and spleen — performed with accuracy and patient comfort.</p>
+                <p class="text-sm text-on-surface-variant leading-relaxed mb-3">Liver, gallbladder, kidneys, and spleen — performed with accuracy and patient comfort.</p>
+                <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener"
+                   class="inline-flex items-center gap-1.5 text-primary font-bold text-sm hover:gap-2.5 transition-all">
+                  Book Scan <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </a>
               </div>
             </div>
           </div>
@@ -290,7 +321,11 @@ tailwind.config = {
                 <p class="text-on-surface-variant fluid-body">High-resolution imaging of the breast, thyroid, scrotum, and pelvic organs for focused diagnostic assessment.</p>
               </div>
             </div>
-            <button onclick="nav('services')" class="px-7 lg:px-8 py-3.5 lg:py-4 bg-surface-container-low text-primary font-bold text-sm lg:text-base rounded-full hover:bg-primary hover:text-on-primary transition-colors shrink-0 self-start md:self-auto">Learn More</button>
+            <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 px-6 lg:px-8 py-3 lg:py-4 bg-primary text-on-primary font-bold text-sm lg:text-base rounded-full hover:bg-tertiary transition-colors shrink-0 self-start md:self-auto whitespace-nowrap">
+              <span class="material-symbols-outlined text-base">event</span>
+              Book Scan
+            </a>
           </div>
         </div>
       </div>
@@ -305,7 +340,7 @@ tailwind.config = {
         <div class="relative reveal max-w-md mx-auto md:mx-0 w-full">
           <div class="absolute -top-6 -left-6 sm:-top-8 sm:-left-8 w-full h-full bg-secondary-container/30 rounded-xl -rotate-3 z-0"></div>
           <div class="relative rounded-xl overflow-hidden shadow-2xl z-10">
-            <img src="https://static.wixstatic.com/media/3bdab7_d3f0a321b11a4b7bad8fa584d2a20cc7~mv2.jpg" alt="Lynne Marais" class="w-full aspect-[3/4] object-cover">
+            <img src="images/lynne.jpg" alt="Lynne Marais" class="w-full aspect-[3/4] object-cover">
           </div>
           <div class="absolute -bottom-6 right-2 sm:-bottom-8 sm:-right-6 bg-white p-5 sm:p-6 rounded-lg shadow-xl z-20 border-t-4 border-tertiary">
             <p class="font-bold text-primary text-lg sm:text-xl font-headline">20+ Years</p>
@@ -378,8 +413,29 @@ tailwind.config = {
     <!-- Asymmetric visual -->
     <section class="max-w-7xl mx-auto fluid-pad-x py-10 sm:py-12">
       <div class="grid grid-cols-12 gap-6 lg:gap-8">
-        <div class="col-span-12 md:col-span-7 aspect-[4/3] rounded-xl overflow-hidden shadow-2xl reveal">
-          <img class="w-full h-full object-cover" src="https://static.wixstatic.com/media/78cc986324bb4af7a2fb2c01dabbfd93.jpg" alt="Modern ultrasound studio">
+        <div class="col-span-12 md:col-span-7 aspect-[4/3] rounded-xl overflow-hidden shadow-2xl reveal relative bg-gradient-to-br from-primary via-[#005757] to-[#003e3e]">
+          <!-- Soft accents -->
+          <div class="absolute -top-12 -left-12 w-64 h-64 rounded-full bg-secondary-container/15 blur-3xl"></div>
+          <div class="absolute -bottom-20 -right-16 w-80 h-80 rounded-full bg-tertiary/20 blur-3xl"></div>
+          <!-- Decorative serif initial -->
+          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span class="font-headline italic text-secondary-container/10 select-none leading-none" style="font-size:clamp(14rem,30vw,26rem)">U</span>
+          </div>
+          <!-- Editorial label -->
+          <div class="absolute top-6 left-6 sm:top-8 sm:left-8">
+            <p class="text-[0.6rem] sm:text-[0.7rem] font-bold uppercase tracking-[0.22em] text-secondary-container">Our Approach</p>
+            <div class="w-10 h-[2px] bg-secondary-container/60 mt-2"></div>
+          </div>
+          <!-- Quote -->
+          <div class="absolute inset-0 flex items-center justify-center px-8 sm:px-12 lg:px-16">
+            <div class="text-center max-w-md">
+              <span class="material-symbols-outlined text-secondary-container/70 mb-4" style="font-size:clamp(2rem,4vw,2.75rem)">format_quote</span>
+              <p class="font-headline italic text-on-primary leading-snug" style="font-size:clamp(1.5rem,3vw,2.25rem)">
+                Imaging that's <span class="text-secondary-container">accurate</span>, ethical, and delivered with care.
+              </p>
+              <p class="text-on-primary/60 text-xs sm:text-sm uppercase tracking-[0.2em] mt-6">— The Ultrasound Studio</p>
+            </div>
+          </div>
         </div>
         <div class="col-span-12 md:col-span-5 flex items-center reveal">
           <div class="bg-secondary-container/30 rounded-xl p-7 sm:p-9 lg:p-10 border-l-4 border-secondary-container">
@@ -399,7 +455,7 @@ tailwind.config = {
           <div class="relative reveal max-w-md mx-auto md:mx-0 w-full">
             <div class="absolute -top-6 -left-6 sm:-top-8 sm:-left-8 w-full h-full bg-secondary-container/25 rounded-xl -rotate-3 z-0"></div>
             <div class="relative rounded-xl overflow-hidden shadow-2xl z-10">
-              <img class="w-full aspect-[3/4] object-cover" src="https://static.wixstatic.com/media/3bdab7_d3f0a321b11a4b7bad8fa584d2a20cc7~mv2.jpg" alt="Lynne Marais, Diagnostic Sonographer">
+              <img class="w-full aspect-[3/4] object-cover" src="images/lynne.jpg" alt="Lynne Marais, Diagnostic Sonographer">
             </div>
             <div class="absolute bottom-6 right-2 sm:bottom-10 sm:-right-6 bg-white p-5 sm:p-6 rounded-lg shadow-xl z-20 border-t-4 border-tertiary max-w-[80%] sm:max-w-[260px]">
               <p class="font-bold text-primary text-lg sm:text-xl font-headline">Lynne Marais</p>
@@ -544,11 +600,14 @@ tailwind.config = {
                 <span class="text-tertiary font-bold uppercase fluid-eyebrow mb-2">01</span>
                 <h3 class="noto-serif font-bold mb-3 text-on-surface fluid-h3">Musculoskeletal</h3>
                 <p class="text-on-surface-variant mb-4 fluid-body">Assessment of joints, tendons, ligaments, and muscles. Commonly used for sports injuries, pain, inflammation, or limited movement.</p>
-                <ul class="text-sm text-on-surface-variant space-y-1">
+                <ul class="text-sm text-on-surface-variant space-y-1 mb-5">
                   <li>• Shoulders &amp; rotator cuff</li>
                   <li>• Knees &amp; ankles</li>
                   <li>• Tendons, ligaments &amp; muscles</li>
                 </ul>
+                <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener" class="text-primary font-bold inline-flex items-center gap-2 group/link mt-auto">
+                  Book Scan <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
               </div>
             </div>
           </div>
@@ -579,11 +638,16 @@ tailwind.config = {
                 <h3 class="noto-serif font-bold mb-3 fluid-h3">Small Parts</h3>
                 <p class="text-primary-fixed fluid-body">High-resolution imaging to evaluate lumps, swelling, or areas of concern in the breast, thyroid, and scrotum.</p>
               </div>
-              <ul class="text-sm text-primary-fixed/90 space-y-1 border-t border-white/15 pt-5">
-                <li>• Breast</li>
-                <li>• Thyroid</li>
-                <li>• Scrotum</li>
-              </ul>
+              <div>
+                <ul class="text-sm text-primary-fixed/90 space-y-1 border-t border-white/15 pt-5 mb-5">
+                  <li>• Breast</li>
+                  <li>• Thyroid</li>
+                  <li>• Scrotum</li>
+                </ul>
+                <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener" class="text-secondary-container font-bold inline-flex items-center gap-2 group/link">
+                  Book Scan <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -595,11 +659,14 @@ tailwind.config = {
                 <span class="text-tertiary font-bold uppercase fluid-eyebrow mb-1 block">04</span>
                 <h3 class="text-xl sm:text-2xl noto-serif font-bold mb-3 text-on-surface">Vascular</h3>
                 <p class="text-on-surface-variant mb-4 fluid-body">Non-invasive studies to assess blood flow and circulation — investigating blockages and vascular disease.</p>
-                <ul class="text-sm text-on-surface-variant space-y-1 mt-auto">
+                <ul class="text-sm text-on-surface-variant space-y-1 mb-5">
                   <li>• Carotid artery studies</li>
                   <li>• Venous (DVT) studies</li>
                   <li>• Arterial studies</li>
                 </ul>
+                <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener" class="text-primary font-bold inline-flex items-center gap-2 group/link mt-auto">
+                  Book Scan <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
               </div>
             </div>
             <div class="bg-surface-container-lowest rounded-xl overflow-hidden group shadow-sm hover:shadow-xl transition-all reveal">
@@ -608,10 +675,13 @@ tailwind.config = {
                 <span class="text-tertiary font-bold uppercase fluid-eyebrow mb-1 block">05</span>
                 <h3 class="text-xl sm:text-2xl noto-serif font-bold mb-3 text-on-surface">Pelvic &amp; Gynaecological</h3>
                 <p class="text-on-surface-variant mb-4 fluid-body">Assessment of the uterus, ovaries, and surrounding structures for pelvic pain, menstrual irregularities, and gynaecological concerns.</p>
-                <ul class="text-sm text-on-surface-variant space-y-1 mt-auto">
+                <ul class="text-sm text-on-surface-variant space-y-1 mb-5">
                   <li>• Uterus &amp; endometrium</li>
                   <li>• Ovaries &amp; adnexa</li>
                 </ul>
+                <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener" class="text-primary font-bold inline-flex items-center gap-2 group/link mt-auto">
+                  Book Scan <span class="material-symbols-outlined group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+                </a>
               </div>
             </div>
           </div>
