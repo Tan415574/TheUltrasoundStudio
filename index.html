@@ -81,6 +81,8 @@ tailwind.config = {
   .organic-blob-1 { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
   .organic-blob-2 { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
   .organic-blob   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  .organic-blob-3 { border-radius: 40% 60% 65% 35% / 55% 45% 55% 45%; }
+  .organic-blob-4 { border-radius: 70% 30% 50% 50% / 40% 60% 40% 60%; }
   .blob-bg { filter: blur(80px); opacity: 0.15; z-index: -1; }
   html { scroll-behavior: smooth; }
   .page { display: none; }
@@ -99,6 +101,7 @@ tailwind.config = {
   .fluid-eyebrow { font-size: clamp(0.7rem, 0.78vw, 0.78rem); letter-spacing: 0.2em; }
   .fluid-section { padding-top: clamp(4rem, 8vw, 7rem); padding-bottom: clamp(4rem, 8vw, 7rem); }
   .fluid-pad-x   { padding-left: clamp(1.25rem, 4vw, 2.5rem); padding-right: clamp(1.25rem, 4vw, 2.5rem); }
+  .hero-brand    { font-size: clamp(3rem, 8vw, 6.5rem); line-height: 1; letter-spacing: -0.025em; }
 
   /* Testimonial carousel */
   .testimonial-slide { display: none; opacity: 0; transition: opacity .4s ease; }
@@ -171,10 +174,12 @@ tailwind.config = {
           <span class="text-tertiary font-semibold uppercase fluid-eyebrow">HPCSA Registered Sonographer</span>
         </div>
 
-        <h1 class="font-headline fluid-display text-primary mb-6 sm:mb-8 max-w-4xl mx-auto">
-          Precision through<br>
-          <span class="italic text-on-surface-variant">The Human Lens</span>
+        <h1 class="font-headline hero-brand font-bold text-primary mb-3 sm:mb-4">
+          The Ultrasound Studio
         </h1>
+        <p class="font-headline italic text-on-surface-variant mb-7 sm:mb-9" style="font-size:clamp(1.1rem,1.8vw,1.6rem)">
+          Precision through <span class="text-tertiary">The Human Lens</span>
+        </p>
 
         <p class="fluid-lead text-on-surface-variant max-w-2xl mx-auto mb-8 sm:mb-10">
           Accurate, high-quality diagnostic ultrasound delivered with care, calm, and over 20 years of clinical experience — based at Intercare Blaauwberg in Cape Town.
@@ -210,10 +215,10 @@ tailwind.config = {
             </div>
           </div>
           <div class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-primary">credit_card</span>
+            <span class="material-symbols-outlined text-primary">payments</span>
             <div class="text-left">
-              <div class="text-sm font-semibold text-on-surface">Medical Aid Accepted</div>
-              <div class="text-xs text-on-surface-variant">All major schemes</div>
+              <div class="text-sm font-semibold text-on-surface">Cash Practice</div>
+              <div class="text-xs text-on-surface-variant">Discovery affiliated</div>
             </div>
           </div>
         </div>
@@ -341,13 +346,16 @@ tailwind.config = {
         <div class="relative z-10 px-7 sm:px-10 lg:px-14 py-12 sm:py-16 lg:py-20 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 lg:gap-10">
           <div class="max-w-xl">
             <h2 class="font-headline fluid-h2 text-on-primary mb-4">Ready to make a booking?</h2>
-            <p class="fluid-lead text-primary-fixed">Schedule your appointment online — quick, easy, and at your convenience.</p>
+            <p class="fluid-lead text-primary-fixed">Book online or message us on WhatsApp — quick, easy, and at your convenience.</p>
           </div>
           <div class="flex flex-col sm:flex-row gap-4 shrink-0 w-full md:w-auto">
             <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener"
                class="bg-secondary-container text-on-secondary-container px-8 lg:px-10 py-4 rounded-full text-sm sm:text-base font-bold hover:scale-105 transition-transform shadow-lg shadow-black/10 text-center whitespace-nowrap">Book Online Now</a>
-            <a href="tel:0680928026"
-               class="bg-on-primary/10 text-on-primary border border-on-primary/20 backdrop-blur px-8 lg:px-10 py-4 rounded-full text-sm sm:text-base font-bold hover:bg-on-primary/20 transition-all text-center whitespace-nowrap">Call the Studio</a>
+            <a href="https://wa.me/27680928026" target="_blank" rel="noopener"
+               class="bg-on-primary/10 text-on-primary border border-on-primary/20 backdrop-blur px-8 lg:px-10 py-4 rounded-full text-sm sm:text-base font-bold hover:bg-on-primary/20 transition-all text-center whitespace-nowrap inline-flex items-center justify-center gap-2">
+               <span class="material-symbols-outlined text-base">chat</span>
+               WhatsApp Us
+            </a>
           </div>
         </div>
       </div>
@@ -376,7 +384,45 @@ tailwind.config = {
       </div>
     </section>
 
-    <!-- Asymmetric visual -->
+    <!-- Bio: Lynne Marais — MOVED UP, NOW FIRST CONTENT BLOCK -->
+    <section class="bg-surface-container-lowest fluid-section">
+      <div class="max-w-7xl mx-auto fluid-pad-x">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+          <div class="relative reveal max-w-md mx-auto md:mx-0 w-full">
+            <div class="absolute -top-6 -left-6 sm:-top-8 sm:-left-8 w-full h-full bg-secondary-container/25 rounded-xl -rotate-3 z-0"></div>
+            <div class="relative rounded-xl overflow-hidden shadow-2xl z-10">
+              <img class="w-full aspect-[3/4] object-cover" src="images/lynne.jpg" alt="Lynne Marais, Diagnostic Sonographer">
+            </div>
+            <div class="absolute bottom-6 right-2 sm:bottom-10 sm:-right-6 bg-white p-5 sm:p-6 rounded-lg shadow-xl z-20 border-t-4 border-tertiary max-w-[80%] sm:max-w-[260px]">
+              <p class="font-bold text-primary text-lg sm:text-xl font-headline">Lynne Marais</p>
+              <p class="text-tertiary text-[0.65rem] sm:text-xs font-bold tracking-[0.18em] uppercase mt-1">Diagnostic Sonographer</p>
+              <div class="mt-3 sm:mt-4 flex flex-wrap gap-2">
+                <span class="bg-surface-container text-[0.65rem] sm:text-[0.7rem] font-medium px-2.5 py-1 rounded">Nat. Dip. Radiography</span>
+                <span class="bg-surface-container text-[0.65rem] sm:text-[0.7rem] font-medium px-2.5 py-1 rounded">BTech Ultrasound</span>
+                <span class="bg-surface-container text-[0.65rem] sm:text-[0.7rem] font-medium px-2.5 py-1 rounded">HPCSA</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <h2 class="uppercase fluid-eyebrow text-tertiary font-bold mb-4">The Human Lens</h2>
+            <h3 class="font-headline fluid-h2 text-primary mb-6">Expertise Guided by Empathy.</h3>
+            <div class="space-y-4 text-on-surface-variant fluid-body">
+              <p>I obtained my National Diploma in Radiography from the Central University of Technology (CUT) in 2001 and my BTech in Ultrasound from the Cape Peninsula University of Technology (CPUT) in 2003. Over the past 20 years, I've worked in private radiology practices in both Cape Town and Bloemfontein.</p>
+              <p>At The Ultrasound Studio, my focus is on delivering high-quality diagnostic ultrasound examinations in a calm, professional, and caring environment. I believe excellent imaging goes hand-in-hand with patient comfort, clear communication, and a personal approach.</p>
+            </div>
+            <div class="pt-7">
+              <div class="flex items-center gap-4">
+                <div class="w-12 sm:w-16 h-[2px] bg-secondary-container shrink-0"></div>
+                <span class="font-headline italic text-xl sm:text-2xl text-primary">"Precision with heart."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Asymmetric visual / Testimonials -->
     <section class="max-w-7xl mx-auto fluid-pad-x py-10 sm:py-12">
       <div class="grid grid-cols-12 gap-6 lg:gap-8">
         <div class="col-span-12 md:col-span-7 rounded-xl overflow-hidden shadow-2xl reveal relative bg-gradient-to-br from-primary via-[#005757] to-[#003e3e] p-7 sm:p-9 lg:p-11 min-h-[380px] sm:min-h-[420px] flex flex-col">
@@ -459,44 +505,6 @@ tailwind.config = {
       </div>
     </section>
 
-    <!-- Bio: Lynne Marais -->
-    <section class="bg-surface-container-lowest fluid-section mt-8 sm:mt-12">
-      <div class="max-w-7xl mx-auto fluid-pad-x">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
-          <div class="relative reveal max-w-md mx-auto md:mx-0 w-full">
-            <div class="absolute -top-6 -left-6 sm:-top-8 sm:-left-8 w-full h-full bg-secondary-container/25 rounded-xl -rotate-3 z-0"></div>
-            <div class="relative rounded-xl overflow-hidden shadow-2xl z-10">
-              <img class="w-full aspect-[3/4] object-cover" src="images/lynne.jpg" alt="Lynne Marais, Diagnostic Sonographer">
-            </div>
-            <div class="absolute bottom-6 right-2 sm:bottom-10 sm:-right-6 bg-white p-5 sm:p-6 rounded-lg shadow-xl z-20 border-t-4 border-tertiary max-w-[80%] sm:max-w-[260px]">
-              <p class="font-bold text-primary text-lg sm:text-xl font-headline">Lynne Marais</p>
-              <p class="text-tertiary text-[0.65rem] sm:text-xs font-bold tracking-[0.18em] uppercase mt-1">Diagnostic Sonographer</p>
-              <div class="mt-3 sm:mt-4 flex flex-wrap gap-2">
-                <span class="bg-surface-container text-[0.65rem] sm:text-[0.7rem] font-medium px-2.5 py-1 rounded">Nat. Dip. Radiography</span>
-                <span class="bg-surface-container text-[0.65rem] sm:text-[0.7rem] font-medium px-2.5 py-1 rounded">BTech Ultrasound</span>
-                <span class="bg-surface-container text-[0.65rem] sm:text-[0.7rem] font-medium px-2.5 py-1 rounded">HPCSA</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="reveal">
-            <h2 class="uppercase fluid-eyebrow text-tertiary font-bold mb-4">The Human Lens</h2>
-            <h3 class="font-headline fluid-h2 text-primary mb-6">Expertise Guided by Empathy.</h3>
-            <div class="space-y-4 text-on-surface-variant fluid-body">
-              <p>I obtained my National Diploma in Radiography from the Central University of Technology (CUT) in 2001 and my BTech in Ultrasound from the Cape Peninsula University of Technology (CPUT) in 2003. Over the past 20 years, I've worked in private radiology practices in both Cape Town and Bloemfontein.</p>
-              <p>At The Ultrasound Studio, my focus is on delivering high-quality diagnostic ultrasound examinations in a calm, professional, and caring environment. I believe excellent imaging goes hand-in-hand with patient comfort, clear communication, and a personal approach.</p>
-            </div>
-            <div class="pt-7">
-              <div class="flex items-center gap-4">
-                <div class="w-12 sm:w-16 h-[2px] bg-secondary-container shrink-0"></div>
-                <span class="font-headline italic text-xl sm:text-2xl text-primary">"Precision with heart."</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Connect With Us -->
     <section class="max-w-7xl mx-auto fluid-pad-x fluid-section">
       <div class="text-center mb-12 lg:mb-16 reveal">
@@ -544,9 +552,9 @@ tailwind.config = {
           <div class="bg-tertiary-container text-on-tertiary p-7 sm:p-9 lg:p-10 rounded-lg shadow-lg reveal">
             <h4 class="font-bold text-xl sm:text-2xl mb-5 font-headline">Get in Touch</h4>
             <div class="space-y-4">
-              <a href="tel:0680928026" class="flex items-center gap-4 hover:translate-x-1 transition-transform">
-                <span class="material-symbols-outlined">call</span>
-                <span class="font-medium">068 092 8026</span>
+              <a href="https://wa.me/27680928026" target="_blank" rel="noopener" class="flex items-center gap-4 hover:translate-x-1 transition-transform">
+                <span class="material-symbols-outlined">chat</span>
+                <span class="font-medium">WhatsApp 068 092 8026</span>
               </a>
               <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener"
                  class="flex items-center gap-4 hover:translate-x-1 transition-transform">
@@ -584,8 +592,9 @@ tailwind.config = {
                class="bg-primary text-on-primary px-7 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold shadow-xl shadow-primary/25 hover:translate-y-[-2px] transition-all">
               Book a Scan
             </a>
-            <a href="tel:0680928026" class="bg-surface-container-high text-primary px-7 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold hover:bg-secondary-container hover:text-on-secondary-container transition-colors">
-              Call 068 092 8026
+            <a href="https://wa.me/27680928026" target="_blank" rel="noopener" class="bg-surface-container-high text-primary px-7 sm:px-8 py-3.5 sm:py-4 rounded-full text-sm sm:text-base font-bold hover:bg-secondary-container hover:text-on-secondary-container transition-colors inline-flex items-center gap-2">
+              <span class="material-symbols-outlined text-base">chat</span>
+              WhatsApp Us
             </a>
           </div>
         </div>
@@ -600,9 +609,12 @@ tailwind.config = {
           <!-- Musculoskeletal (large) -->
           <div class="col-span-12 md:col-span-7 group reveal">
             <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 h-full flex flex-col md:flex-row">
-              <div class="w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:min-h-[260px] overflow-hidden relative bg-gradient-to-br from-primary/15 to-secondary-container/30 flex items-center justify-center">
-                <span class="material-symbols-outlined text-primary/60" style="font-size:clamp(5rem,10vw,9rem)">accessibility_new</span>
-                <div class="absolute inset-0 bg-gradient-to-t from-primary/15 to-transparent"></div>
+              <!-- BLOB COMPOSITION instead of image -->
+              <div class="w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:min-h-[280px] overflow-hidden relative bg-secondary-container/20">
+                <div class="absolute -top-8 -left-8 w-56 h-56 bg-primary/80 organic-blob"></div>
+                <div class="absolute top-1/3 right-2 w-40 h-40 bg-secondary-container organic-blob-2"></div>
+                <div class="absolute -bottom-10 left-1/4 w-44 h-44 bg-tertiary/60 organic-blob-3"></div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-white/40 rounded-full backdrop-blur-sm"></div>
               </div>
               <div class="w-full md:w-1/2 p-7 sm:p-9 lg:p-10 flex flex-col justify-center">
                 <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-5">
@@ -626,8 +638,11 @@ tailwind.config = {
           <!-- Abdominal -->
           <div class="col-span-12 md:col-span-5 group reveal">
             <div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 h-full">
-              <div class="aspect-[3/2] md:aspect-auto md:h-64 overflow-hidden relative bg-gradient-to-br from-tertiary/15 to-primary/10 flex items-center justify-center">
-                <span class="material-symbols-outlined text-tertiary/60" style="font-size:clamp(4.5rem,9vw,8rem)">stethoscope</span>
+              <!-- BLOB COMPOSITION instead of image -->
+              <div class="aspect-[3/2] md:aspect-auto md:h-64 overflow-hidden relative bg-tertiary/10">
+                <div class="absolute -top-6 right-6 w-44 h-44 bg-tertiary/70 organic-blob-2"></div>
+                <div class="absolute -bottom-10 -left-6 w-52 h-52 bg-primary/60 organic-blob"></div>
+                <div class="absolute top-1/3 left-1/2 -translate-x-1/2 w-24 h-24 bg-secondary-container organic-blob-4"></div>
               </div>
               <div class="p-7 sm:p-9 lg:p-10">
                 <span class="text-tertiary font-bold uppercase fluid-eyebrow mb-2 block">02</span>
@@ -644,7 +659,6 @@ tailwind.config = {
           <div class="col-span-12 md:col-span-4 group reveal">
             <div class="bg-primary text-on-primary rounded-xl p-7 sm:p-9 lg:p-10 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-between h-full gap-8">
               <div>
-                <span class="material-symbols-outlined mb-5" style="font-size:clamp(2rem,3vw,2.5rem)">biotech</span>
                 <span class="text-primary-fixed font-bold uppercase fluid-eyebrow mb-2 block">03</span>
                 <h3 class="noto-serif font-bold mb-3 fluid-h3">Small Parts</h3>
                 <p class="text-primary-fixed fluid-body">High-resolution imaging to evaluate lumps, swelling, or areas of concern in the breast, thyroid, and scrotum.</p>
@@ -666,7 +680,6 @@ tailwind.config = {
           <div class="col-span-12 md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
             <div class="bg-surface-container-lowest rounded-xl overflow-hidden group shadow-sm hover:shadow-xl transition-all reveal">
               <div class="p-7 lg:p-8 flex flex-col h-full">
-                <span class="material-symbols-outlined text-secondary mb-4" style="font-size:clamp(1.75rem,2.5vw,2rem)">monitoring</span>
                 <span class="text-tertiary font-bold uppercase fluid-eyebrow mb-1 block">04</span>
                 <h3 class="text-xl sm:text-2xl noto-serif font-bold mb-3 text-on-surface">Vascular</h3>
                 <p class="text-on-surface-variant mb-4 fluid-body">Non-invasive studies to assess blood flow and circulation — investigating blockages and vascular disease.</p>
@@ -682,7 +695,6 @@ tailwind.config = {
             </div>
             <div class="bg-surface-container-lowest rounded-xl overflow-hidden group shadow-sm hover:shadow-xl transition-all reveal">
               <div class="p-7 lg:p-8 flex flex-col h-full">
-                <span class="material-symbols-outlined text-tertiary mb-4" style="font-size:clamp(1.75rem,2.5vw,2rem)">family_restroom</span>
                 <span class="text-tertiary font-bold uppercase fluid-eyebrow mb-1 block">05</span>
                 <h3 class="text-xl sm:text-2xl noto-serif font-bold mb-3 text-on-surface">Pelvic &amp; Gynaecological</h3>
                 <p class="text-on-surface-variant mb-4 fluid-body">Assessment of the uterus, ovaries, and surrounding structures for pelvic pain, menstrual irregularities, and gynaecological concerns.</p>
@@ -717,7 +729,7 @@ tailwind.config = {
       </div>
     </section>
 
-    <!-- REFERRALS & MEDICAL AID -->
+    <!-- REFERRALS & PAYMENT -->
     <section class="fluid-section bg-surface relative overflow-hidden">
       <div class="absolute -top-20 right-0 w-[clamp(220px,30vw,400px)] h-[clamp(220px,30vw,400px)] bg-secondary rounded-full blob-bg pointer-events-none"></div>
       <div class="max-w-7xl mx-auto fluid-pad-x">
@@ -727,38 +739,42 @@ tailwind.config = {
             <div class="relative z-10 bg-surface-container-highest rounded-xl p-2 sm:p-3 rotate-1 shadow-2xl">
               <div class="rounded-lg w-full aspect-[4/5] bg-gradient-to-br from-primary/20 via-surface to-tertiary/15 flex items-center justify-center">
                 <div class="text-center px-6 sm:px-8">
-                  <span class="material-symbols-outlined text-primary mb-3 sm:mb-4" style="font-size:clamp(3.5rem,6vw,5.5rem)">description</span>
-                  <p class="font-headline text-xl sm:text-2xl text-primary mb-2">Referrals welcome</p>
-                  <p class="text-sm text-on-surface-variant max-w-xs mx-auto">From GPs, specialists, physiotherapists, and other healthcare providers.</p>
+                  <span class="material-symbols-outlined text-primary mb-3 sm:mb-4" style="font-size:clamp(3.5rem,6vw,5.5rem)">chat</span>
+                  <p class="font-headline text-xl sm:text-2xl text-primary mb-2">Referrals via WhatsApp</p>
+                  <p class="text-sm text-on-surface-variant max-w-xs mx-auto mb-4">From GPs, specialists, physiotherapists, and other healthcare providers — message us directly.</p>
+                  <a href="https://wa.me/27680928026" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded-full text-xs font-bold hover:bg-tertiary transition-colors">
+                    <span class="material-symbols-outlined text-base">chat</span>
+                    WhatsApp 068 092 8026
+                  </a>
                 </div>
               </div>
             </div>
             <div class="absolute -bottom-4 right-2 sm:-bottom-6 sm:-right-6 bg-tertiary text-white p-5 sm:p-7 rounded-xl shadow-xl max-w-[80%] sm:max-w-xs">
-              <p class="font-bold text-lg sm:text-xl mb-1 sm:mb-2 font-headline">Medical Aid</p>
-              <p class="text-xs sm:text-sm opacity-90 leading-relaxed">We accept all major medical aid schemes — please have your details ready when booking.</p>
+              <p class="font-bold text-lg sm:text-xl mb-1 sm:mb-2 font-headline">Cash Practice</p>
+              <p class="text-xs sm:text-sm opacity-90 leading-relaxed">Discovery affiliated. Payment due at the time of your appointment.</p>
             </div>
           </div>
 
           <div class="w-full md:w-1/2 reveal">
             <span class="text-tertiary font-bold uppercase fluid-eyebrow mb-4 block">Bookings &amp; Referrals</span>
-            <h2 class="noto-serif font-bold text-primary mb-7 fluid-h2">Referrals &amp; Medical Aid</h2>
+            <h2 class="noto-serif font-bold text-primary mb-7 fluid-h2">Referrals &amp; Payment</h2>
             <div class="space-y-6">
               <div class="flex gap-4 sm:gap-5">
                 <div class="shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                  <span class="material-symbols-outlined">description</span>
+                  <span class="material-symbols-outlined">chat</span>
                 </div>
                 <div>
-                  <h4 class="text-lg sm:text-xl font-bold mb-1 text-on-surface">Do I need a referral?</h4>
-                  <p class="text-on-surface-variant fluid-body">Some scans require a referral letter from your GP or specialist. If you're unsure, contact the practice before booking.</p>
+                  <h4 class="text-lg sm:text-xl font-bold mb-1 text-on-surface">Referrals via WhatsApp</h4>
+                  <p class="text-on-surface-variant fluid-body">Healthcare providers can send referrals directly via WhatsApp on <a href="https://wa.me/27680928026" target="_blank" rel="noopener" class="text-primary font-semibold">068 092 8026</a>. Patients unsure whether they need a referral can also message us first.</p>
                 </div>
               </div>
               <div class="flex gap-4 sm:gap-5">
                 <div class="shrink-0 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary">
-                  <span class="material-symbols-outlined">verified</span>
+                  <span class="material-symbols-outlined">payments</span>
                 </div>
                 <div>
-                  <h4 class="text-lg sm:text-xl font-bold mb-1 text-on-surface">Medical Aid Accepted</h4>
-                  <p class="text-on-surface-variant fluid-body">We accept all major medical aid schemes. Please bring your membership details to your appointment.</p>
+                  <h4 class="text-lg sm:text-xl font-bold mb-1 text-on-surface">Cash Practice — Discovery Affiliated</h4>
+                  <p class="text-on-surface-variant fluid-body">The Ultrasound Studio is a cash-based practice. We are Discovery affiliated, so Discovery members may submit their invoice for reimbursement directly with their scheme.</p>
                 </div>
               </div>
               <div class="flex gap-4 sm:gap-5">
@@ -767,13 +783,13 @@ tailwind.config = {
                 </div>
                 <div>
                   <h4 class="text-lg sm:text-xl font-bold mb-1 text-on-surface">Easy Booking</h4>
-                  <p class="text-on-surface-variant fluid-body">Appointments can be booked online, or by phone on <a href="tel:0680928026" class="text-primary font-semibold">068 092 8026</a>.</p>
+                  <p class="text-on-surface-variant fluid-body">Book online via our diary, or message us on WhatsApp on <a href="https://wa.me/27680928026" target="_blank" rel="noopener" class="text-primary font-semibold">068 092 8026</a>.</p>
                 </div>
               </div>
             </div>
             <div class="mt-8 p-6 sm:p-7 border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-low">
               <p class="text-xs font-bold text-primary uppercase tracking-[0.18em] mb-3">Patient Note</p>
-              <p class="text-on-surface-variant italic fluid-body">Please remember to bring your referral letter and medical aid card to your appointment for immediate processing.</p>
+              <p class="text-on-surface-variant italic fluid-body">Please remember to bring your referral letter to your appointment. Payment is required on the day of your scan; Discovery members will receive an invoice for reimbursement.</p>
             </div>
           </div>
         </div>
@@ -792,8 +808,11 @@ tailwind.config = {
           <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener"
                class="bg-secondary-container text-on-secondary-container px-8 lg:px-10 py-4 rounded-full text-sm sm:text-base font-bold shadow-2xl hover:scale-105 transition-transform">Book Appointment</a>
-            <a href="tel:0680928026"
-               class="bg-transparent border-2 border-white/40 text-white px-8 lg:px-10 py-4 rounded-full text-sm sm:text-base font-bold hover:bg-white/10 transition-colors">Call the Practice</a>
+            <a href="https://wa.me/27680928026" target="_blank" rel="noopener"
+               class="bg-transparent border-2 border-white/40 text-white px-8 lg:px-10 py-4 rounded-full text-sm sm:text-base font-bold hover:bg-white/10 transition-colors inline-flex items-center justify-center gap-2">
+               <span class="material-symbols-outlined text-base">chat</span>
+               WhatsApp Us
+            </a>
           </div>
         </div>
       </div>
@@ -807,16 +826,16 @@ tailwind.config = {
     <div class="sm:col-span-2 md:col-span-1">
       <div class="font-headline text-lg sm:text-xl font-bold text-primary mb-4">The Ultrasound Studio</div>
       <p class="text-on-surface-variant text-sm leading-relaxed mb-6">
-        Professional diagnostic sonography in Blouberg, Cape Town. HPCSA registered and committed to ethical, accurate imaging.
+        Professional diagnostic sonography in Blouberg, Cape Town. HPCSA registered cash practice — Discovery affiliated.
       </p>
       <div class="flex gap-3">
-        <a href="tel:0680928026" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-white transition-all">
-          <span class="material-symbols-outlined text-base">call</span>
+        <a href="https://wa.me/27680928026" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-white transition-all" aria-label="WhatsApp">
+          <span class="material-symbols-outlined text-base">chat</span>
         </a>
-        <a href="https://maps.google.com/?q=Intercare+Blaauwberg+Cape+Town" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-white transition-all">
+        <a href="https://maps.google.com/?q=Intercare+Blaauwberg+Cape+Town" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-white transition-all" aria-label="Map">
           <span class="material-symbols-outlined text-base">location_on</span>
         </a>
-        <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-white transition-all">
+        <a href="https://mygc.co.za/external/diary/2ff2934d-96d2-41cf-a3d2-cb4364b0b01e" target="_blank" rel="noopener" class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-primary hover:text-white transition-all" aria-label="Book">
           <span class="material-symbols-outlined text-base">event</span>
         </a>
       </div>
@@ -833,7 +852,7 @@ tailwind.config = {
     <div>
       <h4 class="font-bold text-on-surface mb-4 sm:mb-5 uppercase tracking-[0.18em] text-xs">Contact</h4>
       <ul class="space-y-3 text-sm text-on-surface-variant">
-        <li><a href="tel:0680928026" class="hover:text-primary transition-colors">068 092 8026</a></li>
+        <li><a href="https://wa.me/27680928026" target="_blank" rel="noopener" class="hover:text-primary transition-colors">WhatsApp 068 092 8026</a></li>
         <li>Unit 10 Intercare Blaauwberg<br>Cnr Links Rd &amp; Park Dr<br>Parklands, Cape Town, 7441</li>
       </ul>
     </div>
